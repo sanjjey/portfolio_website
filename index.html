@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjjey Arumugam | AI & Data Science Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        .accent-color {
+            color: #64ffda;
+        }
+        .bg-accent {
+            background-color: #64ffda;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #64ffda;
+        }
+        .card {
+            background-color: #112240;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .skill-tag {
+            background-color: #1e293b;
+            color: #64ffda;
+            transition: background-color 0.3s ease;
+        }
+        .skill-tag:hover {
+             background-color: #64ffda;
+             color: #0a192f;
+        }
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 1px;
+            background-color: #334155;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body class="leading-normal tracking-normal">
+
+    <!-- Header / Navigation -->
+    <header class="fixed w-full z-30 top-0 text-white bg-opacity-90 backdrop-blur-sm" style="background-color: rgba(10, 25, 47, 0.85);">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4 px-6">
+            <div class="pl-4 flex items-center">
+                <a class="text-white no-underline hover:no-underline font-bold text-2xl lg:text-3xl accent-color" href="#">
+                    SA
+                </a>
+            </div>
+            <div class="block lg:hidden pr-4">
+                <button id="nav-toggle" class="flex items-center p-1 text-gray-400 hover:text-white focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+                </button>
+            </div>
+            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-900 lg:bg-transparent text-center p-4 lg:p-0 z-20" id="nav-content">
+                <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#about">About</a></li>
+                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#skills">Skills</a></li>
+                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#projects">Projects</a></li>
+                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#experience">Experience</a></li>
+                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="pt-32 pb-20 md:pt-48 md:pb-32">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <p class="text-lg accent-color mb-4">Hi, my name is</p>
+                    <h1 class="text-4xl md:text-7xl font-bold text-gray-200">Sanjjey Arumugam.</h1>
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-400 mt-2">I build intelligent AI solutions.</h2>
+                    <p class="mt-6 text-lg text-gray-400 max-w-2xl">
+                        I'm a Computer Science student focused on deploying production-ready AI solutions. Experienced in building end-to-end applications, from predictive disease models to automated content platforms. I'm passionate about solving real-world problems for a better future.
+                    </p>
+                    <div class="mt-8 flex space-x-4">
+                        <a href="mailto:sanjjeyarumugam@gmail.com" class="text-gray-400 hover:accent-color transition duration-300" aria-label="Email"><i class="fas fa-envelope fa-2x"></i></a>
+                        <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:accent-color transition duration-300" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
+                        <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:accent-color transition duration-300" aria-label="GitHub"><i class="fab fa-github fa-2x"></i></a>
+                        <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:accent-color transition duration-300" aria-label="LeetCode"><i class="fas fa-code fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div class="md:w-3/5 text-gray-400 text-lg space-y-4">
+                        <p>
+                            As a dedicated Computer Science student with a specialization in Artificial Intelligence, my goal is to leverage technology to create meaningful impact. I have hands-on experience in the entire development lifecycle, from conceptualization and design to deployment and scaling.
+                        </p>
+                        <p>
+                            My projects, such as the <strong class="text-gray-300">Stage Based Osteoarthritis Generator</strong> and the AI-powered content platform <strong class="text-gray-300">Vidi-Q</strong>, demonstrate my ability to tackle complex problems using cutting-edge technologies like Generative Adversarial Networks (cGANs) and Large Language Model (LLM) integration. I'm proficient in Python, building scalable data pipelines, and creating intuitive user experiences.
+                        </p>
+                        <p>
+                            I am driven by a curiosity to learn and a commitment to excellence, always seeking opportunities to apply my skills to solve challenging real-world problems.
+                        </p>
+                    </div>
+                    <div class="md:w-2/5 flex justify-center">
+                        <div class="w-64 h-64 rounded-lg overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 group">
+                           <img src="1742148511806 (1).jpeg" alt="Sanjjey Arumugam profile photo" class="w-full h-full object-cover transition duration-500 group-hover:grayscale-0 grayscale">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">Skills</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-300 mb-4">Programming</h3>
+                        <ul class="space-y-2">
+                            <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Python</li>
+                            <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">HTML/CSS</li>
+                            <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">JavaScript (Basics)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-300 mb-4">App Development</h3>
+                        <ul class="space-y-2">
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">React-Native</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Flask</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">APIs</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Git</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-300 mb-4">Machine Learning</h3>
+                        <ul class="space-y-2">
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">PyTorch</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Seaborn</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Scikit-Learn</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">OpenCV</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-300 mb-4">Databases & Tools</h3>
+                         <ul class="space-y-2">
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">MySQL</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">MongoDB</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Zapier</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Figma</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Supabase</li>
+                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Gemini</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="card rounded-lg p-6 shadow-lg">
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fas fa-bone fa-2x accent-color"></i>
+                            <a href="#" class="text-gray-400 hover:accent-color"><i class="fab fa-github fa-lg"></i></a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Stage Based Osteoarthritis Generator</h3>
+                        <p class="text-gray-400 mb-4">
+                            A predictive disease modeling tool that uses a Conditional GAN (cGAN) to synthesize high-fidelity knee X-rays and forecast osteoarthritis progression, aiding in data augmentation and patient education.
+                        </p>
+                        <ul class="flex flex-wrap gap-2 text-sm">
+                            <li class="skill-tag rounded-full px-3 py-1">cGAN</li>
+                            <li class="skill-tag rounded-full px-3 py-1">PyTorch</li>
+                            <li class="skill-tag rounded-full px-3 py-1">OpenCV</li>
+                            <li class="skill-tag rounded-full px-3 py-1">Predictive Modeling</li>
+                        </ul>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="card rounded-lg p-6 shadow-lg">
+                        <div class="flex justify-between items-center mb-4">
+                            <i class="fas fa-video fa-2x accent-color"></i>
+                             <a href="#" class="text-gray-400 hover:accent-color"><i class="fab fa-github fa-lg"></i></a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Vidi-Q: AI-Powered Content Platform</h3>
+                        <p class="text-gray-400 mb-4">
+                            A Generative AI web application that creates complete multimedia educational content—including scripts, video, audio, and quizzes—from a single user prompt, with secure user authentication.
+                        </p>
+                        <ul class="flex flex-wrap gap-2 text-sm">
+                            <li class="skill-tag rounded-full px-3 py-1">Generative AI</li>
+                            <li class="skill-tag rounded-full px-3 py-1">Flask</li>
+                            <li class="skill-tag rounded-full px-3 py-1">React-Native</li>
+                            <li class="skill-tag rounded-full px-3 py-1">LLM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Experience Section -->
+        <section id="experience" class="py-20">
+            <div class="container mx-auto px-6">
+                 <h2 class="section-heading text-3xl font-bold mb-12 accent-color">Experience</h2>
+                 <div class="card p-6 rounded-lg shadow-lg">
+                     <h3 class="text-2xl font-bold text-gray-200">Event Co-Manager & Platform Developer</h3>
+                     <p class="text-lg accent-color mb-2">Neuronix Club</p>
+                     <p class="text-gray-400 mb-4">
+                         I co-managed a major tech event, handling everything from publicity to execution. A key contribution was designing and building a custom compiler and coding platform for a unique jumbled-code programming challenge. We successfully attracted over 500 registrations and delivered a well-received, technically demanding event for the top 10 finalist teams.
+                     </p>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Awards & Publications -->
+        <section id="awards" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">Awards & Publications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-200 mb-4">Awards</h3>
+                        <ul class="list-disc list-inside text-gray-400 space-y-2">
+                            <li><span class="font-semibold accent-color">Winners</span> - Kyberastra, Amrita Cyber Nation (2025)</li>
+                            <li><span class="font-semibold accent-color">Unstoppable Leader</span> - Unstop (2025)</li>
+                            <li><span class="font-semibold accent-color">National Level Semi-Finalist</span> - Tata Imagination Challenge (2024)</li>
+                            <li><span class="font-semibold accent-color">Best Paper Award</span> - IEEE, ICONScept (2024)</li>
+                        </ul>
+                    </div>
+                     <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-200 mb-4">Publication</h3>
+                        <div class="text-gray-400">
+                            <p class="font-semibold text-gray-300">QR CODE ENCRYPTION USING LU DECOMPOSITION AND PCA</p>
+                            <p>Published in: <span class="accent-color">IEEE, ICONScept (2024)</span></p>
+                            <a href="https://doi.org/10.1109/IConSCEPT61884.2024.10627798" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 text-sm bg-accent text-slate-800 font-bold py-2 px-4 rounded hover:bg-opacity-80 transition duration-300">Read Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-2xl font-bold accent-color mb-2">Get In Touch</h2>
+                <p class="text-gray-400 max-w-xl mx-auto mb-8">
+                    I'm currently seeking new opportunities and am always open to discussing new projects, creative ideas, or opportunities to be part of an innovative team. Feel free to reach out!
+                </p>
+                <a href="mailto:sanjjeyarumugam@gmail.com" class="bg-transparent border border-accent-color accent-color text-lg font-bold py-3 px-8 rounded hover:bg-accent hover:text-slate-800 transition duration-300">
+                    Say Hello
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <div class="flex justify-center space-x-4 mb-4 lg:hidden">
+                <a href="mailto:sanjjeyarumugam@gmail.com" class="hover:accent-color" aria-label="Email"><i class="fas fa-envelope fa-lg"></i></a>
+                <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="hover:accent-color" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="hover:accent-color" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+                <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="hover:accent-color" aria-label="LeetCode"><i class="fas fa-code fa-lg"></i></a>
+            </div>
+            <p>Designed & Built by Sanjjey Arumugam</p>
+             <p class="text-xs mt-2">Inspired by modern portfolio designs</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar toggle
+        document.getElementById('nav-toggle').onclick = function(){
+            document.getElementById("nav-content").classList.toggle("hidden");
+        }
+    </script>
+
+</body>
+</html>
+
