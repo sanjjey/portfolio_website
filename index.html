@@ -8,103 +8,180 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0a192f;
+            --accent: #64ffda;
+            --card-bg: #112240;
+            --text-main: #ccd6f6;
+            --text-muted: #8892b0;
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a192f;
-            color: #ccd6f6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
         }
-        .accent-color {
-            color: #64ffda;
-        }
-        .bg-accent {
-            background-color: #64ffda;
+        .accent-color { color: var(--accent); }
+        .bg-accent { background-color: var(--accent); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Navigation */
+        .glass-nav {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .nav-link {
+            position: relative;
             transition: color 0.3s ease;
         }
-        .nav-link:hover {
-            color: #64ffda;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
         }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--accent); }
+
+        /* Cards & Interactions */
         .card {
-            background-color: #112240;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-8px);
+            border-color: rgba(100, 255, 218, 0.3);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(100, 255, 218, 0.15);
         }
         .skill-tag {
-            background-color: #1e293b;
-            color: #64ffda;
-            transition: background-color 0.3s ease;
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
         }
         .skill-tag:hover {
-             background-color: #64ffda;
-             color: #0a192f;
+             background-color: var(--accent);
+             color: var(--bg-color);
+             transform: translateY(-2px);
+        }
+
+        /* Typography & Decor */
+        .section-heading {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
         }
         .section-heading::after {
             content: '';
             display: block;
-            width: 150px;
+            width: 100%;
+            max-width: 300px;
             height: 1px;
-            background-color: #334155;
-            margin-top: 8px;
+            background-color: #233554;
+            margin-left: 20px;
         }
+
+        /* Ambient Background Glows */
+        .ambient-glow {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(100,255,218,0.05) 0%, rgba(10,25,47,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typing cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: var(--accent);
+        }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
-<body class="leading-normal tracking-normal">
+<body class="leading-normal tracking-normal relative">
 
-    <header class="fixed w-full z-30 top-0 text-white bg-opacity-90 backdrop-blur-sm" style="background-color: rgba(10, 25, 47, 0.85);">
+    <div class="ambient-glow top-[-10%] left-[-10%]"></div>
+    <div class="ambient-glow bottom-[20%] right-[-10%]"></div>
+
+    <header class="fixed w-full z-50 top-0 text-white glass-nav transition-all duration-300" id="header">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4 px-6">
             <div class="pl-4 flex items-center">
-                <a class="text-white no-underline hover:no-underline font-bold text-2xl lg:text-3xl accent-color" href="#">
-                    SA
+                <a class="text-white no-underline hover:no-underline font-bold text-2xl tracking-wider accent-color flex items-center gap-2 group" href="#">
+                    <i class="fas fa-terminal group-hover:animate-pulse"></i> SA
                 </a>
             </div>
-            <div class="block lg:hidden pr-4">
-                <button id="nav-toggle" class="flex items-center p-1 text-gray-400 hover:text-white focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            <div class="block md:hidden pr-4">
+                <button id="nav-toggle" class="flex items-center p-1 text-gray-400 hover:text-white focus:outline-none transition">
                     <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
                 </button>
             </div>
-            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-900 lg:bg-transparent text-center p-4 lg:p-0 z-20" id="nav-content">
-                <ul class="list-reset lg:flex justify-end flex-1 items-center">
-                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#about">About</a></li>
-                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#skills">Skills</a></li>
-                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#projects">Projects</a></li>
-                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#experience">Experience</a></li>
-                    <li class="mr-3"><a class="inline-block py-2 px-4 nav-link" href="#contact">Contact</a></li>
+            <div class="w-full flex-grow md:flex md:items-center md:w-auto hidden md:block mt-2 md:mt-0 bg-[#112240] md:bg-transparent text-center p-4 md:p-0 z-20 rounded-b-lg md:rounded-none shadow-lg md:shadow-none" id="nav-content">
+                <ul class="list-reset md:flex justify-end flex-1 items-center text-sm font-medium">
+                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#about"><span class="accent-color font-mono mr-1">01.</span>About</a></li>
+                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#skills"><span class="accent-color font-mono mr-1">02.</span>Skills</a></li>
+                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#projects"><span class="accent-color font-mono mr-1">03.</span>Projects</a></li>
+                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#experience"><span class="accent-color font-mono mr-1">04.</span>Experience</a></li>
+                    <li class="my-2 md:my-0"><a class="inline-block border border-[#64ffda] text-[#64ffda] hover:bg-[#64ffda] hover:bg-opacity-10 px-4 py-2 rounded transition" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
     </header>
 
     <main>
-        <section class="pt-32 pb-20 md:pt-48 md:pb-32">
-            <div class="container mx-auto px-6">
+        <section class="min-h-screen flex items-center pt-20">
+            <div class="container mx-auto px-6 reveal">
                 <div class="max-w-4xl mx-auto">
-                    <p class="text-lg accent-color mb-4">Hi, my name is</p>
-                    <h1 class="text-4xl md:text-7xl font-bold text-gray-200">Sanjjey Arumugam.</h1>
-                    <h2 class="text-3xl md:text-5xl font-bold text-gray-400 mt-2">I build intelligent models & scalable infrastructure.</h2>
-                    <p class="mt-6 text-lg text-gray-400 max-w-2xl">
+                    <p class="text-lg accent-color font-mono mb-4 animate-fade-in-up">Hi, my name is</p>
+                    <h1 class="text-5xl md:text-7xl font-bold text-gray-200 tracking-tight mb-2">Sanjjey Arumugam.</h1>
+                    <h2 class="text-4xl md:text-6xl font-bold text-[#8892b0] mt-2 mb-6 h-20 md:h-auto">
+                        I build <span id="typewriter" class="accent-color typing-cursor"></span>
+                    </h2>
+                    <p class="mt-6 text-lg text-[#8892b0] max-w-2xl leading-relaxed">
                         I'm a Computer Science student specializing in both Full-Stack Development and Artificial Intelligence. Whether I'm training predictive cGAN models or architecting high-throughput RESTful APIs with containerized environments, I focus on delivering end-to-end, production-ready systems.
                     </p>
-                    <div class="mt-8 flex space-x-4">
-                        <a href="mailto:sanjjeyarumugam@gmail.com" class="text-gray-400 hover:accent-color transition duration-300" aria-label="Email"><i class="fas fa-envelope fa-2x"></i></a>
-                        <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:accent-color transition duration-300" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
-                        <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:accent-color transition duration-300" aria-label="GitHub"><i class="fab fa-github fa-2x"></i></a>
-                        <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:accent-color transition duration-300" aria-label="LeetCode"><i class="fas fa-code fa-2x"></i></a>
+                    <div class="mt-10 flex space-x-6 items-center">
+                        <a href="mailto:sanjjeyarumugam@gmail.com" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="Email"><i class="fas fa-envelope fa-2xl"></i></a>
+                        <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2xl"></i></a>
+                        <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="GitHub"><i class="fab fa-github fa-2xl"></i></a>
+                        <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="LeetCode"><i class="fas fa-code fa-2xl"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center gap-10">
-                    <div class="md:w-3/5 text-gray-400 text-lg space-y-4">
+        <section id="about" class="py-24">
+            <div class="container mx-auto px-6 max-w-5xl reveal">
+                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6]"><span class="accent-color font-mono text-2xl mr-2">01.</span>About Me</h2>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-3/5 text-[#8892b0] text-lg space-y-5 leading-relaxed">
                         <p>
                             As a Computer Science student specializing in both Artificial Intelligence and web infrastructure, I recognized early on that a great predictive model is useless if it can't be accessed securely and reliably by users. This drove me to master the full software lifecycle.
                         </p>
@@ -112,190 +189,272 @@
                             On the AI front, I have developed everything from Physics-Informed Neural Networks (PINNs) for real-time weather tracking to conditional GANs for medical imaging synthesis. 
                         </p>
                         <p>
-                            On the engineering side, I build the infrastructure to support these models. I design relational database schemas using Supabase, construct scalable REST APIs with Python/Flask, and containerize deployments using Docker to ensure seamless CI/CD integration with modern frontends like ReactJS.
+                            On the engineering side, I build the infrastructure to support these models. I design relational database schemas using Supabase, construct scalable REST APIs with Python/Flask, and containerize deployments using Docker to ensure seamless CI/CD integration with modern frontends.
                         </p>
                     </div>
-                    <div class="md:w-2/5 flex justify-center">
-                        <div class="w-64 h-64 rounded-lg overflow-hidden shadow-xl transform transition duration-500 hover:scale-105 group">
-                            <img src="profile.jpeg" alt="Sanjjey Arumugam profile photo" class="w-full h-full object-cover transition duration-500 group-hover:grayscale-0 grayscale">
+                    <div class="md:w-2/5 flex justify-center relative group cursor-pointer">
+                        <div class="absolute inset-0 border-2 border-[#64ffda] rounded-lg translate-x-4 translate-y-4 transition duration-500 group-hover:translate-x-2 group-hover:translate-y-2 z-0"></div>
+                        <div class="w-64 h-64 rounded-lg overflow-hidden relative z-10 bg-[#64ffda]">
+                            <img src="profile.jpeg" alt="Sanjjey Arumugam" class="w-full h-full object-cover mix-blend-multiply filter grayscale transition duration-500 group-hover:mix-blend-normal group-hover:grayscale-0">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">Technical Arsenal</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-300 mb-4">Machine Learning & AI</h3>
-                        <ul class="space-y-2">
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">PyTorch</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">LLMs & Prompting</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Computer Vision (GANs)</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Scikit-Learn</li>
+        <section id="skills" class="py-24">
+            <div class="container mx-auto px-6 max-w-5xl reveal">
+                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6]"><span class="accent-color font-mono text-2xl mr-2">02.</span>Technical Arsenal</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="card p-6 rounded-lg">
+                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-brain fa-2x"></i></div>
+                        <h3 class="text-xl font-semibold text-gray-200 mb-4">AI & ML</h3>
+                        <ul class="space-y-3">
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">PyTorch</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">LLMs & Prompting</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Computer Vision (GANs)</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Scikit-Learn</span></li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-300 mb-4">Backend & Cloud</h3>
-                        <ul class="space-y-2">
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Python (Flask/FastAPI)</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">RESTful APIs</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Docker</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">CI/CD</li>
+                    <div class="card p-6 rounded-lg">
+                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-server fa-2x"></i></div>
+                        <h3 class="text-xl font-semibold text-gray-200 mb-4">Backend & Cloud</h3>
+                        <ul class="space-y-3">
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Python (Flask/FastAPI)</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">RESTful APIs</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Docker</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">CI/CD & Git</span></li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-300 mb-4">Frontend Integration</h3>
-                        <ul class="space-y-2">
-                            <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">ReactJS</li>
-                            <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">NextJS</li>
-                            <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">HTML/CSS</li>
-                            <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">React-Native</li>
+                    <div class="card p-6 rounded-lg">
+                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-code fa-2x"></i></div>
+                        <h3 class="text-xl font-semibold text-gray-200 mb-4">Frontend Integration</h3>
+                        <ul class="space-y-3">
+                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">ReactJS</span></li>
+                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">NextJS</span></li>
+                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">HTML/CSS</span></li>
+                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">React-Native</span></li>
                         </ul>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-300 mb-4">Data & Databases</h3>
-                         <ul class="space-y-2">
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">SQL</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Supabase</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">Snowflake</li>
-                           <li class="skill-tag rounded-md px-3 py-1 text-sm font-medium inline-block">MongoDB</li>
+                    <div class="card p-6 rounded-lg">
+                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-database fa-2x"></i></div>
+                        <h3 class="text-xl font-semibold text-gray-200 mb-4">Data & Databases</h3>
+                         <ul class="space-y-3">
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">SQL</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Supabase</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Snowflake</span></li>
+                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">MongoDB</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">Featured Projects</h2>
+        <section id="projects" class="py-24">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6] reveal"><span class="accent-color font-mono text-2xl mr-2">03.</span>Featured Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="card rounded-lg p-6 shadow-lg border border-gray-800">
-                        <div class="flex justify-between items-center mb-4">
-                            <i class="fas fa-layer-group fa-2x accent-color"></i>
-                            <a href="#" class="text-gray-400 hover:accent-color"><i class="fab fa-github fa-lg"></i></a>
+                    
+                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-layer-group fa-6x text-[#64ffda]"></i></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <i class="far fa-folder-open fa-2x accent-color"></i>
+                            <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Vidi-Q: AI Content Platform</h3>
-                        <p class="text-gray-400 mb-4 text-sm">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Vidi-Q: AI Content Platform</h3>
+                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
                             Architected a highly responsive RESTful API backend integrated with a ReactJS-compatible frontend and LLMs. Containerized the deployment environment using Docker and implemented intelligent caching to ensure low-latency, high-throughput media generation.
                         </p>
-                        <ul class="flex flex-wrap gap-2 text-xs">
-                            <li class="skill-tag rounded-full px-3 py-1">Generative AI</li>
-                            <li class="skill-tag rounded-full px-3 py-1">Flask & ReactJS</li>
-                            <li class="skill-tag rounded-full px-3 py-1">Docker</li>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
+                            <li>Generative AI</li>
+                            <li>Flask</li>
+                            <li>ReactJS</li>
+                            <li>Docker</li>
                         </ul>
                     </div>
 
-                    <div class="card rounded-lg p-6 shadow-lg border border-gray-800">
-                        <div class="flex justify-between items-center mb-4">
-                            <i class="fas fa-brain fa-2x accent-color"></i>
-                            <a href="#" class="text-gray-400 hover:accent-color"><i class="fab fa-github fa-lg"></i></a>
+                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden" style="transition-delay: 100ms;">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-brain fa-6x text-[#64ffda]"></i></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <i class="far fa-folder-open fa-2x accent-color"></i>
+                            <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Osteoarthritis Stage Generator</h3>
-                        <p class="text-gray-400 mb-4 text-sm">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Osteoarthritis Stage Generator</h3>
+                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
                             A predictive disease modeling tool that uses a Conditional GAN (cGAN) in PyTorch to synthesize high-fidelity knee X-rays across 5 osteoarthritis stages, implementing latent space projection to forecast disease progression dynamically.
                         </p>
-                        <ul class="flex flex-wrap gap-2 text-xs">
-                            <li class="skill-tag rounded-full px-3 py-1">cGAN</li>
-                            <li class="skill-tag rounded-full px-3 py-1">PyTorch</li>
-                            <li class="skill-tag rounded-full px-3 py-1">Deep Learning</li>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
+                            <li>cGAN</li>
+                            <li>PyTorch</li>
+                            <li>Deep Learning</li>
                         </ul>
                     </div>
 
-                    <div class="card rounded-lg p-6 shadow-lg border border-gray-800">
-                        <div class="flex justify-between items-center mb-4">
-                            <i class="fas fa-database fa-2x accent-color"></i>
-                             <a href="#" class="text-gray-400 hover:accent-color"><i class="fab fa-github fa-lg"></i></a>
+                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden" style="transition-delay: 200ms;">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-database fa-6x text-[#64ffda]"></i></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <i class="far fa-folder-open fa-2x accent-color"></i>
+                             <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Shared Home Copilot Backend</h3>
-                        <p class="text-gray-400 mb-4 text-sm">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Shared Home Copilot</h3>
+                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
                             Engineered the backend infrastructure for a household coordination application. Blueprinted a robust database schema using Supabase to manage complex relational data and integrated an API-driven Telegram bot for automated user task execution.
                         </p>
-                        <ul class="flex flex-wrap gap-2 text-xs">
-                            <li class="skill-tag rounded-full px-3 py-1">Python</li>
-                            <li class="skill-tag rounded-full px-3 py-1">Supabase</li>
-                            <li class="skill-tag rounded-full px-3 py-1">API Integrations</li>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
+                            <li>Python</li>
+                            <li>Supabase</li>
+                            <li>Telegram API</li>
                         </ul>
                     </div>
 
-                    <div class="card rounded-lg p-6 shadow-lg border border-gray-800">
-                        <div class="flex justify-between items-center mb-4">
-                            <i class="fas fa-satellite fa-2x accent-color"></i>
-                             <a href="#" class="text-gray-400 hover:accent-color"><i class="fab fa-github fa-lg"></i></a>
+                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden" style="transition-delay: 300ms;">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-satellite fa-6x text-[#64ffda]"></i></div>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <i class="far fa-folder-open fa-2x accent-color"></i>
+                             <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-2">Real-Time Cyclone Pipeline</h3>
-                        <p class="text-gray-400 mb-4 text-sm">
+                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Real-Time Cyclone Pipeline</h3>
+                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
                             Developed a physics-informed AI system using a custom ReSA ConvLSTM and real-time data ingestion via Open-Meteo APIs. Applied thermodynamic constraints to enforce physical accuracy and predict storm saddle points dynamically.
                         </p>
-                        <ul class="flex flex-wrap gap-2 text-xs">
-                            <li class="skill-tag rounded-full px-3 py-1">PINNs</li>
-                            <li class="skill-tag rounded-full px-3 py-1">Data Engineering</li>
-                            <li class="skill-tag rounded-full px-3 py-1">REST APIs</li>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
+                            <li>PINNs</li>
+                            <li>Data Engineering</li>
+                            <li>REST APIs</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="awards" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-heading text-3xl font-bold mb-12 accent-color">Awards & Publications</h2>
+        <section id="experience" class="py-24">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6] reveal"><span class="accent-color font-mono text-2xl mr-2">04.</span>Experience & Awards</h2>
+                
+                <div class="mb-12 card p-8 border-l-4 border-[#64ffda] rounded-r-lg reveal">
+                    <div class="flex flex-col md:flex-row justify-between mb-2">
+                        <h3 class="text-2xl font-bold text-gray-200">Event Co-Manager & Platform Developer</h3>
+                        <span class="font-mono text-[#64ffda] text-sm mt-2 md:mt-0">Neuronix Club</span>
+                    </div>
+                    <p class="text-[#8892b0] leading-relaxed mt-4">
+                        Co-managed a major tech event, handling end-to-end execution. A key technical contribution was designing and building a custom compiler and coding platform for a unique jumbled-code programming challenge. Successfully attracted over 500 registrations and delivered a technically demanding event for the top 10 finalist teams.
+                    </p>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="card p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-bold text-gray-200 mb-4">Awards & Hackathons</h3>
-                        <ul class="list-disc list-inside text-gray-400 space-y-2 text-sm">
-                            <li><span class="font-semibold accent-color">Winners</span> - Kyberastra, Amrita Cyber Nation (2025)</li>
-                            <li><span class="font-semibold accent-color">Unstoppable Leader</span> - Unstop (2025)</li>
-                            <li><span class="font-semibold accent-color">National Level Semi-Finalist</span> - Tata Imagination Challenge (2024)</li>
-                            <li><span class="font-semibold accent-color">Best Paper Award</span> - IEEE, ICONScept (2024)</li>
+                    <div class="card p-8 rounded-lg reveal">
+                        <div class="flex items-center gap-3 mb-6">
+                            <i class="fas fa-trophy text-[#64ffda] fa-xl"></i>
+                            <h3 class="text-xl font-bold text-gray-200">Hackathons & Honors</h3>
+                        </div>
+                        <ul class="space-y-4 text-[#8892b0] text-sm">
+                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">Winners</strong> - Kyberastra, Amrita Cyber Nation (2025)</span></li>
+                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">Unstoppable Leader</strong> - Unstop (2025)</span></li>
+                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">National Level Semi-Finalist</strong> - Tata Imagination Challenge (2024)</span></li>
+                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">Best Paper Award</strong> - IEEE, ICONScept (2024)</span></li>
                         </ul>
                     </div>
-                     <div class="card p-6 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-bold text-gray-200 mb-4">Publication</h3>
-                        <div class="text-gray-400 text-sm">
-                            <p class="font-semibold text-gray-300">QR CODE ENCRYPTION USING LU DECOMPOSITION AND PCA</p>
-                            <p class="mt-1">Published in: <span class="accent-color">IEEE, ICONScept (2024)</span></p>
-                            <a href="https://doi.org/10.1109/IConSCEPT61884.2024.10627798" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-sm bg-accent text-slate-800 font-bold py-2 px-4 rounded hover:bg-opacity-80 transition duration-300">Read Research Paper</a>
+                     <div class="card p-8 rounded-lg reveal" style="transition-delay: 100ms;">
+                        <div class="flex items-center gap-3 mb-6">
+                            <i class="fas fa-book-open text-[#64ffda] fa-xl"></i>
+                            <h3 class="text-xl font-bold text-gray-200">Publications</h3>
+                        </div>
+                        <div class="text-[#8892b0] text-sm">
+                            <p class="font-bold text-[#ccd6f6] text-base mb-2">QR CODE ENCRYPTION USING LU DECOMPOSITION AND PCA</p>
+                            <p class="mb-6 font-mono text-xs">Published in: IEEE, ICONScept (2024)</p>
+                            <a href="https://doi.org/10.1109/IConSCEPT61884.2024.10627798" target="_blank" rel="noopener noreferrer" class="inline-block border border-[#64ffda] text-[#64ffda] hover:bg-[#64ffda] hover:text-[#0a192f] font-mono text-sm py-2 px-6 rounded transition duration-300">
+                                Read Paper <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-20 text-center">
-            <div class="container mx-auto px-6">
-                <h2 class="text-2xl font-bold accent-color mb-2">Get In Touch</h2>
-                <p class="text-gray-400 max-w-xl mx-auto mb-8">
-                    Whether you need to architect a robust backend service, train a generative AI model, or integrate both into a seamless application, I'm open to new opportunities. Let's build something great.
+        <section id="contact" class="py-32 text-center reveal">
+            <div class="container mx-auto px-6 max-w-2xl">
+                <p class="font-mono text-[#64ffda] mb-4">05. What's Next?</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-6">Get In Touch</h2>
+                <p class="text-[#8892b0] mb-12 text-lg leading-relaxed">
+                    Whether you need to architect a robust backend service, train a predictive AI model, or integrate both into a seamless application, I'm open to new opportunities. Let's build something great.
                 </p>
-                <a href="mailto:sanjjeyarumugam@gmail.com" class="bg-transparent border border-accent-color accent-color text-lg font-bold py-3 px-8 rounded hover:bg-accent hover:text-slate-800 transition duration-300">
+                <a href="mailto:sanjjeyarumugam@gmail.com" class="inline-block border-2 border-[#64ffda] text-[#64ffda] text-lg font-mono py-4 px-10 rounded hover:bg-[#64ffda] hover:bg-opacity-10 transition duration-300">
                     Say Hello
                 </a>
             </div>
         </section>
     </main>
 
-    <footer class="py-6">
-        <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
-            <div class="flex justify-center space-x-4 mb-4 lg:hidden">
-                <a href="mailto:sanjjeyarumugam@gmail.com" class="hover:accent-color" aria-label="Email"><i class="fas fa-envelope fa-lg"></i></a>
-                <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="hover:accent-color" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
-                <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="hover:accent-color" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
-                <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="hover:accent-color" aria-label="LeetCode"><i class="fas fa-code fa-lg"></i></a>
-            </div>
-            <p>Designed & Built by Sanjjey Arumugam</p>
-             <p class="text-xs mt-1">AI Research & Full-Stack Infrastructure</p>
+    <footer class="py-8 text-center text-[#8892b0] font-mono text-xs reveal">
+        <div class="flex justify-center space-x-6 mb-6 md:hidden">
+            <a href="mailto:sanjjeyarumugam@gmail.com" class="hover:text-[#64ffda]"><i class="fas fa-envelope fa-xl"></i></a>
+            <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" class="hover:text-[#64ffda]"><i class="fab fa-linkedin fa-xl"></i></a>
+            <a href="https://github.com/sanjjey" target="_blank" class="hover:text-[#64ffda]"><i class="fab fa-github fa-xl"></i></a>
+            <a href="https://leetcode.com/u/sanjjey/" target="_blank" class="hover:text-[#64ffda]"><i class="fas fa-code fa-xl"></i></a>
         </div>
+        <p class="hover:text-[#64ffda] transition cursor-pointer">Designed & Built by Sanjjey Arumugam</p>
+        <p class="mt-2 opacity-50">AI Research & Full-Stack Infrastructure</p>
     </footer>
 
     <script>
-        // Navbar toggle
+        // Mobile Navbar Toggle
         document.getElementById('nav-toggle').onclick = function(){
             document.getElementById("nav-content").classList.toggle("hidden");
         }
-    </script>
 
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // Typewriter Effect for Hero Section
+        const phrases = ["intelligent models.", "scalable APIs.", "full-stack apps."];
+        let i = 0;
+        let j = 0;
+        let currentPhrase = [];
+        let isDeleting = false;
+        const typeTarget = document.getElementById('typewriter');
+
+        function loop() {
+            typeTarget.innerHTML = currentPhrase.join('');
+            if (i < phrases.length) {
+                if (!isDeleting && j <= phrases[i].length) {
+                    currentPhrase.push(phrases[i][j]);
+                    j++;
+                    typeTarget.innerHTML = currentPhrase.join('');
+                }
+                if (isDeleting && j <= phrases[i].length) {
+                    currentPhrase.pop(phrases[i][j]);
+                    j--;
+                    typeTarget.innerHTML = currentPhrase.join('');
+                }
+                if (j == phrases[i].length) {
+                    isDeleting = true;
+                    setTimeout(loop, 2000); // Wait before deleting
+                    return;
+                }
+                if (isDeleting && j === 0) {
+                    currentPhrase = [];
+                    isDeleting = false;
+                    i++;
+                    if (i == phrases.length) i = 0; // Reset array index
+                }
+            }
+            const speed = isDeleting ? 50 : 100;
+            setTimeout(loop, speed);
+        }
+        
+        // Start typing effect after a short delay
+        setTimeout(loop, 1000);
+    </script>
 </body>
 </html>
