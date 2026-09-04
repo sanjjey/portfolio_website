@@ -3,458 +3,1965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanjjey Arumugam | Full-Stack & AI Developer</title>
+    <title>Sanjjey Arumugam | AI Engineer & Full-Stack Architect</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-color: #0a192f;
-            --accent: #64ffda;
-            --card-bg: #112240;
-            --text-main: #ccd6f6;
-            --text-muted: #8892b0;
+            --bg-dark: #050b14;
+            --bg-panel: #0a1728;
+            --bg-card: rgba(13, 27, 46, 0.85);
+            --cyan-glow: #00f2fe;
+            --cyan-dim: #00bcd4;
+            --arc-blue: #4facfe;
+            --gold-accent: #f5af19;
+            --red-alert: #ff416c;
+            --text-bright: #e2f1ff;
+            --text-dim: #8ba3c7;
+            --border-tech: rgba(0, 242, 254, 0.25);
         }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-bright);
             overflow-x: hidden;
-        }
-        .accent-color { color: var(--accent); }
-        .bg-accent { background-color: var(--accent); }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-        /* Navigation */
-        .glass-nav {
-            background: rgba(10, 25, 47, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .nav-link {
             position: relative;
-            transition: color 0.3s ease;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; }
-        .nav-link:hover { color: var(--accent); }
-
-        /* Cards & Interactions */
-        .card {
-            background-color: var(--card-bg);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid transparent;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(100, 255, 218, 0.3);
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(100, 255, 218, 0.15);
-        }
-        .skill-tag {
-            background-color: rgba(100, 255, 218, 0.1);
-            color: var(--accent);
-            border: 1px solid rgba(100, 255, 218, 0.2);
-            transition: all 0.3s ease;
-        }
-        .skill-tag:hover {
-             background-color: var(--accent);
-             color: var(--bg-color);
-             transform: translateY(-2px);
         }
 
-        /* Typography & Decor */
-        .section-heading {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-        .section-heading::after {
-            content: '';
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            height: 1px;
-            background-color: #233554;
-            margin-left: 20px;
+        .font-mono-tech {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Ambient Background Glows */
-        .ambient-glow {
-            position: absolute;
-            width: 40vw;
-            height: 40vw;
-            background: radial-gradient(circle, rgba(100,255,218,0.05) 0%, rgba(10,25,47,0) 70%);
-            border-radius: 50%;
+        .font-hud {
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+        }
+
+        /* High-tech Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--cyan-glow), var(--arc-blue));
+            border-radius: 3px;
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        /* Tech HUD Scanline & Grid Background */
+        .hud-grid {
+            background-image: 
+                linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 255, 0, 0.01));
+            background-size: 100% 3px, 6px 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 99;
+            opacity: 0.6;
         }
 
-        /* Scroll Reveal Animation Classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+        /* Glassmorphic Tech Panels */
+        .tech-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-tech);
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .tech-panel::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 8px; height: 8px;
+            border-top: 2px solid var(--cyan-glow);
+            border-left: 2px solid var(--cyan-glow);
+        }
+        .tech-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 8px; height: 8px;
+            border-bottom: 2px solid var(--cyan-glow);
+            border-right: 2px solid var(--cyan-glow);
+        }
+        .tech-panel:hover {
+            border-color: rgba(0, 242, 254, 0.5);
+            box-shadow: 0 8px 32px -4px rgba(0, 242, 254, 0.15), inset 0 0 15px rgba(0, 242, 254, 0.05);
+            transform: translateY(-3px);
+        }
+
+        /* HUD Glass Header */
+        .hud-nav {
+            background: rgba(5, 11, 20, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Glowing text & pulse */
+        .glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
+        }
+
+        /* Reactor Core Pulse Animation */
+        @keyframes arcPulse {
+            0% { transform: scale(0.97); box-shadow: 0 0 15px rgba(0, 242, 254, 0.4), inset 0 0 15px rgba(0, 242, 254, 0.2); }
+            50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 25px rgba(0, 242, 254, 0.5); }
+            100% { transform: scale(0.97); box-shadow: 0 0 15px rgba(0, 242, 254, 0.4), inset 0 0 15px rgba(0, 242, 254, 0.2); }
+        }
+        .arc-pulse {
+            animation: arcPulse 3s infinite ease-in-out;
+        }
+
+        /* Radar sweep animation */
+        @keyframes radarSweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .radar-spinner {
+            animation: radarSweep 6s linear infinite;
         }
 
         /* Typing cursor */
         .typing-cursor::after {
-            content: '|';
-            animation: blink 1s step-start infinite;
-            color: var(--accent);
+            content: '_';
+            animation: blink 0.8s step-start infinite;
+            color: var(--cyan-glow);
         }
         @keyframes blink { 50% { opacity: 0; } }
+
+        /* Holographic Modal Transition */
+        #hologram-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #hologram-content {
+            transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease;
+            transform-origin: center center;
+        }
+
+        /* Laser Sweep Line */
+        @keyframes laserSweep {
+            0% { top: 0%; opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .laser-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan-glow), #ffffff, var(--cyan-glow), transparent);
+            box-shadow: 0 0 8px var(--cyan-glow);
+            animation: laserSweep 2.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* Tech Buttons */
+        .btn-tech {
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--cyan-glow);
+            color: var(--cyan-glow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-tech:hover {
+            background: rgba(0, 242, 254, 0.25);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        .btn-tech::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-tech:hover::before {
+            left: 100%;
+        }
+
+        /* Scroll reveal */
+        .reveal-node {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-node.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="leading-normal tracking-normal relative">
+<body class="hud-grid select-none md:select-auto">
 
-    <div class="ambient-glow top-[-10%] left-[-10%]"></div>
-    <div class="ambient-glow bottom-[20%] right-[-10%]"></div>
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
 
-    <header class="fixed w-full z-50 top-0 text-white glass-nav transition-all duration-300" id="header">
-        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4 px-6">
-            <div class="pl-4 flex items-center">
-                <a class="text-white no-underline hover:no-underline font-bold text-2xl tracking-wider accent-color flex items-center gap-2 group" href="#">
-                    <i class="fas fa-terminal group-hover:animate-pulse"></i> SA
-                </a>
+    <!-- Dynamic Interactive Background Particles Canvas -->
+    <canvas id="tech-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- ========================================================================= -->
+    <!-- 1. CYBER HUD / JARVIS SYSTEM BOOT BUFFER SCREEN -->
+    <!-- ========================================================================= -->
+    <div id="boot-screen" class="fixed inset-0 z-[100] bg-[#03070d] flex flex-col items-center justify-center transition-all duration-700">
+        <!-- HUD Reticle Backdrop -->
+        <div class="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
+            <!-- Outer Rotating Gauge -->
+            <div class="absolute inset-0 rounded-full border border-cyan-500/20 border-dashed radar-spinner"></div>
+            <div class="absolute inset-4 rounded-full border border-cyan-400/30 border-t-transparent border-b-transparent animate-spin" style="animation-duration: 4s;"></div>
+            
+            <!-- Arc Reactor Core -->
+            <div class="w-36 h-36 md:w-44 md:h-44 rounded-full arc-pulse bg-cyan-950/40 border-2 border-cyan-400 flex flex-col items-center justify-center p-3 relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,254,0.3)_0%,transparent_70%)]"></div>
+                <i class="fas fa-atom text-3xl md:text-4xl text-cyan-300 animate-pulse mb-1"></i>
+                <span class="font-hud text-[10px] tracking-widest text-cyan-400">LOADING...</span>
+                <span id="boot-percent" class="font-mono-tech text-xs text-white font-bold">0%</span>
             </div>
-            <div class="block md:hidden pr-4">
-                <button id="nav-toggle" class="flex items-center p-1 text-gray-400 hover:text-white focus:outline-none transition">
-                    <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+
+            <!-- Compass Markings -->
+            <div class="absolute top-1 font-mono-tech text-[9px] text-cyan-500/60">SYS.INIT.09</div>
+            <div class="absolute bottom-1 font-mono-tech text-[9px] text-cyan-500/60">KERNEL.64 // ONLINE</div>
+            <div class="absolute left-1 font-mono-tech text-[9px] text-cyan-500/60">LOC: ATS.TN</div>
+            <div class="absolute right-1 font-mono-tech text-[9px] text-cyan-500/60">SEC.LVL.05</div>
+        </div>
+
+        <!-- Terminal Diagnostic Stream -->
+        <div class="w-11/12 max-w-lg mt-8 p-4 bg-black/60 border border-cyan-500/30 rounded font-mono-tech text-xs text-cyan-400/90 shadow-2xl relative">
+            <div class="flex justify-between items-center pb-2 mb-2 border-b border-cyan-500/20 text-[10px] text-gray-400">
+                <span>DIAGNOSTIC PROTOCOL // V3.8</span>
+                <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>INITIALIZING</span>
+            </div>
+            <div id="boot-log-container" class="space-y-1 h-20 overflow-hidden font-mono text-[11px] leading-relaxed">
+                <!-- Injected via JavaScript -->
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-full bg-cyan-950/60 h-1.5 rounded-full overflow-hidden mt-3 border border-cyan-500/30">
+                <div id="boot-progress-bar" class="h-full bg-gradient-to-r from-cyan-500 via-sky-400 to-teal-300 w-0 transition-all duration-150"></div>
+            </div>
+        </div>
+
+        <!-- Skip Button -->
+        <button id="skip-boot-btn" class="mt-6 font-mono-tech text-xs text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 border border-cyan-500/30 px-4 py-1.5 rounded transition tracking-wider flex items-center gap-2">
+            <span>[ESC] BYPASS INITIALIZATION</span>
+            <i class="fas fa-forward text-[10px]"></i>
+        </button>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 2. HIGH-TECH COMMAND DOCK (TOP NAVIGATION) -->
+    <!-- ========================================================================= -->
+    <header class="fixed w-full z-40 top-0 hud-nav transition-all duration-300" id="header">
+        <div class="container mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
+            <!-- Brand / Operator ID -->
+            <div class="flex items-center gap-4">
+                <a href="#" class="flex items-center gap-3 group text-white">
+                    <div class="w-9 h-9 rounded bg-cyan-500/10 border border-cyan-400/50 flex items-center justify-center group-hover:border-cyan-300 group-hover:bg-cyan-500/20 transition shadow-[0_0_10px_rgba(0,242,254,0.2)]">
+                        <i class="fas fa-terminal text-cyan-400 text-sm group-hover:scale-110 transition"></i>
+                    </div>
+                    <div>
+                        <div class="font-hud font-bold tracking-wider text-sm flex items-center gap-1.5">
+                            SANJJEY<span class="text-cyan-400">.AI</span>
+                        </div>
+                        <div class="font-mono-tech text-[10px] text-cyan-400/60 tracking-tight">OPERATOR // LEVEL 5</div>
+                    </div>
+                </a>
+
+                <!-- Telemetry Pill (Desktop) -->
+                <div class="hidden lg:flex items-center gap-3 pl-4 border-l border-cyan-500/20 font-mono-tech text-[11px] text-gray-400">
+                    <span class="flex items-center gap-1.5 text-emerald-400">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        SYS ONLINE
+                    </span>
+                    <span class="text-gray-600">|</span>
+                    <span id="hud-clock" class="text-cyan-300/80">00:00:00 UTC</span>
+                    <span class="text-gray-600">|</span>
+                    <span class="text-sky-400/80">CGPA: 8.17</span>
+                </div>
+            </div>
+
+            <!-- Desktop Links -->
+            <nav class="hidden md:flex items-center gap-6 font-mono-tech text-xs">
+                <a href="#about" class="hud-link text-gray-300 hover:text-cyan-400 transition py-1 flex items-center gap-1" data-sound="blip">
+                    <span class="text-cyan-400 font-bold">01.</span>INTEL
+                </a>
+                <a href="#skills" class="hud-link text-gray-300 hover:text-cyan-400 transition py-1 flex items-center gap-1" data-sound="blip">
+                    <span class="text-cyan-400 font-bold">02.</span>ARSENAL
+                </a>
+                <a href="#experience" class="hud-link text-gray-300 hover:text-cyan-400 transition py-1 flex items-center gap-1" data-sound="blip">
+                    <span class="text-cyan-400 font-bold">03.</span>OPS_EXP
+                </a>
+                <a href="#projects" class="hud-link text-gray-300 hover:text-cyan-400 transition py-1 flex items-center gap-1" data-sound="blip">
+                    <span class="text-cyan-400 font-bold">04.</span>SYSTEMS
+                </a>
+                <a href="#education" class="hud-link text-gray-300 hover:text-cyan-400 transition py-1 flex items-center gap-1" data-sound="blip">
+                    <span class="text-cyan-400 font-bold">05.</span>ACADEMICS
+                </a>
+                <a href="#contact" class="hud-link text-gray-300 hover:text-cyan-400 transition py-1 flex items-center gap-1" data-sound="blip">
+                    <span class="text-cyan-400 font-bold">06.</span>COMMS
+                </a>
+            </nav>
+
+            <!-- Control Widget: Audio Mute & Resume Action -->
+            <div class="flex items-center gap-3">
+                <!-- Sound Toggle -->
+                <button id="sound-toggle" class="px-2.5 py-1.5 rounded bg-cyan-950/40 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/20 hover:text-white transition font-mono-tech text-[11px] flex items-center gap-1.5 shadow" title="Toggle Sci-Fi Synthesizer Sound Effects">
+                    <i id="sound-icon" class="fas fa-volume-high text-xs"></i>
+                    <span id="sound-text" class="hidden sm:inline">AUDIO: ON</span>
+                </button>
+
+                <!-- Hologram Quick Teleport Button -->
+                <a href="mailto:sanjjeyarumugam@gmail.com" class="btn-tech px-4 py-1.5 rounded font-mono-tech text-xs tracking-wider font-semibold flex items-center gap-2" data-sound="click">
+                    <span>TRANSMIT</span>
+                    <i class="fas fa-satellite-dish text-xs"></i>
+                </a>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="mobile-toggle" class="md:hidden text-cyan-400 hover:text-white focus:outline-none p-1">
+                    <i class="fas fa-bars text-lg"></i>
                 </button>
             </div>
-            <div class="w-full flex-grow md:flex md:items-center md:w-auto hidden md:block mt-2 md:mt-0 bg-[#112240] md:bg-transparent text-center p-4 md:p-0 z-20 rounded-b-lg md:rounded-none shadow-lg md:shadow-none" id="nav-content">
-                <ul class="list-reset md:flex justify-end flex-1 items-center text-sm font-medium">
-                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#about"><span class="accent-color font-mono mr-1">01.</span>About</a></li>
-                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#skills"><span class="accent-color font-mono mr-1">02.</span>Skills</a></li>
-                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#projects"><span class="accent-color font-mono mr-1">03.</span>Projects</a></li>
-                    <li class="mr-6 my-2 md:my-0"><a class="inline-block nav-link text-[#ccd6f6]" href="#experience"><span class="accent-color font-mono mr-1">04.</span>Experience</a></li>
-                    <li class="my-2 md:my-0"><a class="inline-block border border-[#64ffda] text-[#64ffda] hover:bg-[#64ffda] hover:bg-opacity-10 px-4 py-2 rounded transition" href="#contact">Contact</a></li>
-                </ul>
-            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#06101e] border-b border-cyan-500/30 px-6 py-4 space-y-3 font-mono-tech text-sm">
+            <a href="#about" class="block text-gray-300 hover:text-cyan-400 py-1" onclick="closeMobileMenu()"><span class="text-cyan-400 mr-2">01.</span>Intel / Summary</a>
+            <a href="#skills" class="block text-gray-300 hover:text-cyan-400 py-1" onclick="closeMobileMenu()"><span class="text-cyan-400 mr-2">02.</span>Technical Arsenal</a>
+            <a href="#experience" class="block text-gray-300 hover:text-cyan-400 py-1" onclick="closeMobileMenu()"><span class="text-cyan-400 mr-2">03.</span>Operations & Experience</a>
+            <a href="#projects" class="block text-gray-300 hover:text-cyan-400 py-1" onclick="closeMobileMenu()"><span class="text-cyan-400 mr-2">04.</span>Deployed Projects</a>
+            <a href="#education" class="block text-gray-300 hover:text-cyan-400 py-1" onclick="closeMobileMenu()"><span class="text-cyan-400 mr-2">05.</span>Academics & Honors</a>
+            <a href="#contact" class="block text-cyan-400 py-1" onclick="closeMobileMenu()"><span class="text-cyan-400 mr-2">06.</span>Direct Transmission</a>
         </div>
     </header>
 
-    <main>
-        <section class="min-h-screen flex items-center pt-20">
-            <div class="container mx-auto px-6 reveal">
-                <div class="max-w-4xl mx-auto">
-                    <p class="text-lg accent-color font-mono mb-4 animate-fade-in-up">Hi, my name is</p>
-                    <h1 class="text-5xl md:text-7xl font-bold text-gray-200 tracking-tight mb-2">Sanjjey Arumugam.</h1>
-                    <h2 class="text-4xl md:text-6xl font-bold text-[#8892b0] mt-2 mb-6 h-20 md:h-auto">
-                        I build <span id="typewriter" class="accent-color typing-cursor"></span>
-                    </h2>
-                    <p class="mt-6 text-lg text-[#8892b0] max-w-2xl leading-relaxed">
-                        I'm a Computer Science student specializing in both Full-Stack Development and Artificial Intelligence. Whether I'm training predictive cGAN models or architecting high-throughput RESTful APIs with containerized environments, I focus on delivering end-to-end, production-ready systems.
-                    </p>
-                    <div class="mt-10 flex space-x-6 items-center">
-                        <a href="mailto:sanjjeyarumugam@gmail.com" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="Email"><i class="fas fa-envelope fa-2xl"></i></a>
-                        <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2xl"></i></a>
-                        <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="GitHub"><i class="fab fa-github fa-2xl"></i></a>
-                        <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="text-[#8892b0] hover:text-[#64ffda] transform hover:-translate-y-1 transition duration-300" aria-label="LeetCode"><i class="fas fa-code fa-2xl"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- ========================================================================= -->
+    <!-- 3. FLOATING HUD DOCK / MINIMAP (RIGHT SIDE) -->
+    <!-- ========================================================================= -->
+    <div class="fixed right-4 top-1/2 -translate-y-1/2 z-30 hidden xl:flex flex-col items-center gap-4 bg-[#0a1728]/70 border border-cyan-500/30 p-2.5 rounded-full backdrop-blur-md">
+        <a href="#hero" class="hud-minimap-dot w-2.5 h-2.5 rounded-full bg-cyan-400 hover:scale-150 transition-all" title="Origin" data-sound="blip"></a>
+        <a href="#about" class="hud-minimap-dot w-2 h-2 rounded-full bg-gray-500 hover:bg-cyan-400 hover:scale-150 transition-all" title="Intel / Summary" data-sound="blip"></a>
+        <a href="#skills" class="hud-minimap-dot w-2 h-2 rounded-full bg-gray-500 hover:bg-cyan-400 hover:scale-150 transition-all" title="Arsenal" data-sound="blip"></a>
+        <a href="#experience" class="hud-minimap-dot w-2 h-2 rounded-full bg-gray-500 hover:bg-cyan-400 hover:scale-150 transition-all" title="Operations" data-sound="blip"></a>
+        <a href="#projects" class="hud-minimap-dot w-2 h-2 rounded-full bg-gray-500 hover:bg-cyan-400 hover:scale-150 transition-all" title="Holo Systems" data-sound="blip"></a>
+        <a href="#education" class="hud-minimap-dot w-2 h-2 rounded-full bg-gray-500 hover:bg-cyan-400 hover:scale-150 transition-all" title="Credentials" data-sound="blip"></a>
+        <a href="#contact" class="hud-minimap-dot w-2 h-2 rounded-full bg-gray-500 hover:bg-cyan-400 hover:scale-150 transition-all" title="Comms" data-sound="blip"></a>
+    </div>
 
-        <section id="about" class="py-24">
-            <div class="container mx-auto px-6 max-w-5xl reveal">
-                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6]"><span class="accent-color font-mono text-2xl mr-2">01.</span>About Me</h2>
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <div class="md:w-3/5 text-[#8892b0] text-lg space-y-5 leading-relaxed">
-                        <p>
-                            As a Computer Science student specializing in both Artificial Intelligence and web infrastructure, I recognized early on that a great predictive model is useless if it can't be accessed securely and reliably by users. This drove me to master the full software lifecycle.
-                        </p>
-                        <p>
-                            On the AI front, I have developed everything from Physics-Informed Neural Networks (PINNs) for real-time weather tracking to conditional GANs for medical imaging synthesis. 
-                        </p>
-                        <p>
-                            On the engineering side, I build the infrastructure to support these models. I design relational database schemas using Supabase, construct scalable REST APIs with Python/Flask, and containerize deployments using Docker to ensure seamless CI/CD integration with modern frontends.
-                        </p>
-                    </div>
-                    <div class="md:w-2/5 flex justify-center relative group cursor-pointer">
-                        <div class="absolute inset-0 border-2 border-[#64ffda] rounded-lg translate-x-4 translate-y-4 transition duration-500 group-hover:translate-x-2 group-hover:translate-y-2 z-0"></div>
-                        <div class="w-64 h-64 rounded-lg overflow-hidden relative z-10 bg-[#64ffda]">
-                            <img src="profile.jpeg" alt="Sanjjey Arumugam" class="w-full h-full object-cover mix-blend-multiply filter grayscale transition duration-500 group-hover:mix-blend-normal group-hover:grayscale-0">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- ========================================================================= -->
+    <!-- 4. MAIN CONTENT VIEWPORT -->
+    <!-- ========================================================================= -->
+    <main class="relative z-10">
 
-        <section id="skills" class="py-24">
-            <div class="container mx-auto px-6 max-w-5xl reveal">
-                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6]"><span class="accent-color font-mono text-2xl mr-2">02.</span>Technical Arsenal</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="card p-6 rounded-lg">
-                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-brain fa-2x"></i></div>
-                        <h3 class="text-xl font-semibold text-gray-200 mb-4">AI & ML</h3>
-                        <ul class="space-y-3">
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">PyTorch</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">LLMs & Prompting</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Computer Vision (GANs)</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Scikit-Learn</span></li>
-                        </ul>
-                    </div>
-                    <div class="card p-6 rounded-lg">
-                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-server fa-2x"></i></div>
-                        <h3 class="text-xl font-semibold text-gray-200 mb-4">Backend & Cloud</h3>
-                        <ul class="space-y-3">
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Python (Flask/FastAPI)</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">RESTful APIs</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Docker</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">CI/CD & Git</span></li>
-                        </ul>
-                    </div>
-                    <div class="card p-6 rounded-lg">
-                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-code fa-2x"></i></div>
-                        <h3 class="text-xl font-semibold text-gray-200 mb-4">Frontend Integration</h3>
-                        <ul class="space-y-3">
-                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">ReactJS</span></li>
-                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">NextJS</span></li>
-                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">HTML/CSS</span></li>
-                            <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">React-Native</span></li>
-                        </ul>
-                    </div>
-                    <div class="card p-6 rounded-lg">
-                        <div class="mb-4 text-[#64ffda]"><i class="fas fa-database fa-2x"></i></div>
-                        <h3 class="text-xl font-semibold text-gray-200 mb-4">Data & Databases</h3>
-                         <ul class="space-y-3">
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">SQL</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Supabase</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">Snowflake</span></li>
-                           <li><span class="skill-tag rounded px-3 py-1 text-xs font-mono inline-block w-full text-center">MongoDB</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-24">
-            <div class="container mx-auto px-6 max-w-5xl">
-                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6] reveal"><span class="accent-color font-mono text-2xl mr-2">03.</span>Featured Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="min-h-screen pt-28 pb-16 flex items-center relative overflow-hidden">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     
-                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-layer-group fa-6x text-[#64ffda]"></i></div>
-                        <div class="flex justify-between items-center mb-6 relative z-10">
-                            <i class="far fa-folder-open fa-2x accent-color"></i>
-                            <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
+                    <!-- Left Column: HUD Intel / Pitch -->
+                    <div class="lg:col-span-7 space-y-6 reveal-node">
+                        <!-- Technical Protocol Badge -->
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-cyan-950/60 border border-cyan-400/40 text-cyan-300 font-mono-tech text-xs tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                            <span>SYS_ID: 9443582753 // AI-SDE ARCHITECT</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Vidi-Q: AI Content Platform</h3>
-                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
-                            Architected a highly responsive RESTful API backend integrated with a ReactJS-compatible frontend and LLMs. Containerized the deployment environment using Docker and implemented intelligent caching to ensure low-latency, high-throughput media generation.
-                        </p>
-                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
-                            <li>Generative AI</li>
-                            <li>Flask</li>
-                            <li>ReactJS</li>
-                            <li>Docker</li>
-                        </ul>
-                    </div>
 
-                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden" style="transition-delay: 100ms;">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-brain fa-6x text-[#64ffda]"></i></div>
-                        <div class="flex justify-between items-center mb-6 relative z-10">
-                            <i class="far fa-folder-open fa-2x accent-color"></i>
-                            <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
+                        <div>
+                            <p class="text-cyan-400 font-mono-tech text-sm tracking-widest uppercase">System Identification:</p>
+                            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-hud font-black text-white tracking-tight mt-1">
+                                SANJJEY <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 glow-cyan">ARUMUGAM</span>
+                            </h1>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Osteoarthritis Stage Generator</h3>
-                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
-                            A predictive disease modeling tool that uses a Conditional GAN (cGAN) in PyTorch to synthesize high-fidelity knee X-rays across 5 osteoarthritis stages, implementing latent space projection to forecast disease progression dynamically.
-                        </p>
-                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
-                            <li>cGAN</li>
-                            <li>PyTorch</li>
-                            <li>Deep Learning</li>
-                        </ul>
-                    </div>
 
-                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden" style="transition-delay: 200ms;">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-database fa-6x text-[#64ffda]"></i></div>
-                        <div class="flex justify-between items-center mb-6 relative z-10">
-                            <i class="far fa-folder-open fa-2x accent-color"></i>
-                             <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
+                        <!-- Dynamic Typewriter Directive -->
+                        <div class="font-mono-tech text-lg sm:text-2xl text-gray-300 flex flex-wrap items-center gap-2 min-h-[3.5rem]">
+                            <span class="text-cyan-400 font-bold">&gt;</span>
+                            <span class="text-gray-400">Directives:</span>
+                            <span id="typewriter" class="text-cyan-300 font-semibold typing-cursor"></span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Shared Home Copilot</h3>
-                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
-                            Engineered the backend infrastructure for a household coordination application. Blueprinted a robust database schema using Supabase to manage complex relational data and integrated an API-driven Telegram bot for automated user task execution.
-                        </p>
-                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
-                            <li>Python</li>
-                            <li>Supabase</li>
-                            <li>Telegram API</li>
-                        </ul>
-                    </div>
 
-                    <div class="card rounded-lg p-8 reveal group relative overflow-hidden" style="transition-delay: 300ms;">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition"><i class="fas fa-satellite fa-6x text-[#64ffda]"></i></div>
-                        <div class="flex justify-between items-center mb-6 relative z-10">
-                            <i class="far fa-folder-open fa-2x accent-color"></i>
-                             <a href="#" class="text-[#8892b0] hover:text-[#64ffda] transition"><i class="fab fa-github fa-xl"></i></a>
+                        <!-- Exact Resume Summary -->
+                        <div class="tech-panel p-5 rounded-lg border-l-4 border-l-cyan-400 bg-opacity-80 relative">
+                            <div class="absolute -top-2.5 right-4 px-2 py-0.5 bg-[#0a1728] border border-cyan-500/30 text-[10px] font-mono-tech text-cyan-400 rounded">
+                                OPERATOR SUMMARY
+                            </div>
+                            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                                Final-year <strong class="text-white">B.Tech CSE (Artificial Intelligence)</strong> student at <span class="text-cyan-300">Amrita Vishwa Vidyapeetham</span>, passionate about building scalable full-stack applications and real-world software solutions. Experienced in backend development, database management, frontend technologies, and AI-driven systems with production-level projects. Strong problem-solving and collaboration skills demonstrated through multiple hackathon wins and technical projects.
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-200 mb-3 relative z-10 group-hover:text-[#64ffda] transition">Real-Time Cyclone Pipeline</h3>
-                        <p class="text-[#8892b0] mb-6 text-sm leading-relaxed relative z-10">
-                            Developed a physics-informed AI system using a custom ReSA ConvLSTM and real-time data ingestion via Open-Meteo APIs. Applied thermodynamic constraints to enforce physical accuracy and predict storm saddle points dynamically.
-                        </p>
-                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-[#8892b0] relative z-10 mt-auto">
-                            <li>PINNs</li>
-                            <li>Data Engineering</li>
-                            <li>REST APIs</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="experience" class="py-24">
-            <div class="container mx-auto px-6 max-w-5xl">
-                <h2 class="section-heading text-3xl font-bold mb-12 text-[#ccd6f6] reveal"><span class="accent-color font-mono text-2xl mr-2">04.</span>Experience & Awards</h2>
-                
-                <div class="mb-12 card p-8 border-l-4 border-[#64ffda] rounded-r-lg reveal">
-                    <div class="flex flex-col md:flex-row justify-between mb-2">
-                        <h3 class="text-2xl font-bold text-gray-200">Event Co-Manager & Platform Developer</h3>
-                        <span class="font-mono text-[#64ffda] text-sm mt-2 md:mt-0">Neuronix Club</span>
-                    </div>
-                    <p class="text-[#8892b0] leading-relaxed mt-4">
-                        Co-managed a major tech event, handling end-to-end execution. A key technical contribution was designing and building a custom compiler and coding platform for a unique jumbled-code programming challenge. Successfully attracted over 500 registrations and delivered a technically demanding event for the top 10 finalist teams.
-                    </p>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="card p-8 rounded-lg reveal">
-                        <div class="flex items-center gap-3 mb-6">
-                            <i class="fas fa-trophy text-[#64ffda] fa-xl"></i>
-                            <h3 class="text-xl font-bold text-gray-200">Hackathons & Honors</h3>
-                        </div>
-                        <ul class="space-y-4 text-[#8892b0] text-sm">
-                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">Winners</strong> - Kyberastra, Amrita Cyber Nation (2025)</span></li>
-                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">Unstoppable Leader</strong> - Unstop (2025)</span></li>
-                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">National Level Semi-Finalist</strong> - Tata Imagination Challenge (2024)</span></li>
-                            <li class="flex gap-2 items-start"><i class="fas fa-caret-right text-[#64ffda] mt-1"></i> <span><strong class="text-[#ccd6f6]">Best Paper Award</strong> - IEEE, ICONScept (2024)</span></li>
-                        </ul>
-                    </div>
-                     <div class="card p-8 rounded-lg reveal" style="transition-delay: 100ms;">
-                        <div class="flex items-center gap-3 mb-6">
-                            <i class="fas fa-book-open text-[#64ffda] fa-xl"></i>
-                            <h3 class="text-xl font-bold text-gray-200">Publications</h3>
-                        </div>
-                        <div class="text-[#8892b0] text-sm">
-                            <p class="font-bold text-[#ccd6f6] text-base mb-2">QR CODE ENCRYPTION USING LU DECOMPOSITION AND PCA</p>
-                            <p class="mb-6 font-mono text-xs">Published in: IEEE, ICONScept (2024)</p>
-                            <a href="https://doi.org/10.1109/IConSCEPT61884.2024.10627798" target="_blank" rel="noopener noreferrer" class="inline-block border border-[#64ffda] text-[#64ffda] hover:bg-[#64ffda] hover:text-[#0a192f] font-mono text-sm py-2 px-6 rounded transition duration-300">
-                                Read Paper <i class="fas fa-external-link-alt ml-2"></i>
+                        <!-- Tech Action Links & Quick Transmission -->
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <a href="#projects" class="btn-tech px-6 py-3 rounded font-mono-tech text-xs tracking-wider font-bold flex items-center gap-2" data-sound="click">
+                                <i class="fas fa-project-diagram"></i>
+                                <span>INSPECT SYSTEMS</span>
+                            </a>
+                            <a href="#experience" class="px-6 py-3 rounded bg-gray-900/80 hover:bg-cyan-950 border border-gray-700 hover:border-cyan-400 text-gray-300 hover:text-white font-mono-tech text-xs tracking-wider transition flex items-center gap-2" data-sound="blip">
+                                <i class="fas fa-shield-halved text-cyan-400"></i>
+                                <span>ATS TN INTEL</span>
+                            </a>
+                            <a href="mailto:sanjjeyarumugam@gmail.com" class="px-4 py-3 rounded border border-gray-800 hover:border-cyan-500/50 text-gray-400 hover:text-cyan-400 transition" title="Direct Email" data-sound="blip">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded border border-gray-800 hover:border-cyan-500/50 text-gray-400 hover:text-cyan-400 transition" title="LinkedIn Profile" data-sound="blip">
+                                <i class="fab fa-linkedin text-lg"></i>
+                            </a>
+                            <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded border border-gray-800 hover:border-cyan-500/50 text-gray-400 hover:text-cyan-400 transition" title="GitHub Codebase" data-sound="blip">
+                                <i class="fab fa-github text-lg"></i>
+                            </a>
+                            <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded border border-gray-800 hover:border-cyan-500/50 text-gray-400 hover:text-cyan-400 transition" title="LeetCode Algorithms" data-sound="blip">
+                                <i class="fas fa-code text-lg"></i>
                             </a>
                         </div>
                     </div>
+
+                    <!-- Right Column: Interactive Biometric Visor Portrait ("Touch and Open") -->
+                    <div class="lg:col-span-5 flex flex-col items-center justify-center reveal-node">
+                        
+                        <!-- Biometric Helmet Frame Container -->
+                        <div class="relative group cursor-pointer select-none" id="helmet-pod" onclick="toggleHelmet()">
+                            
+                            <!-- Rotating HUD Radar Brackets -->
+                            <div class="absolute -inset-4 rounded-2xl border border-cyan-500/30 border-dashed pointer-events-none transition-all duration-500 group-hover:border-cyan-400/70 group-hover:scale-105"></div>
+                            <div class="absolute -inset-1 rounded-xl bg-gradient-to-r from-cyan-500/20 via-sky-500/10 to-blue-500/20 blur-md pointer-events-none"></div>
+
+                            <!-- Outer Helmet Pod Box -->
+                            <div class="w-72 sm:w-80 h-96 rounded-xl overflow-hidden relative tech-panel shadow-2xl bg-[#081220] border-2 border-cyan-500/40">
+                                
+                                <!-- User Portrait (Revealed completely and cleanly when helmet opens) -->
+                                <img src="profile.jpeg" alt="Sanjjey Arumugam" id="profile-img" class="w-full h-full object-cover filter brightness-100 contrast-105 transition-all duration-700">
+
+                                <!-- Non-obtrusive HUD telemetry overlays on top of picture (At perimeter edges only, NEVER covering the face) -->
+                                <div id="helmet-open-hud" class="absolute inset-0 p-3 pointer-events-none flex flex-col justify-between opacity-0 transition-opacity duration-500">
+                                    <!-- Top Bar: Coordinates & Non-Obtrusive Facial ID -->
+                                    <div class="flex justify-between items-center text-[10px] font-mono-tech">
+                                        <span class="bg-black/75 px-2 py-0.5 rounded border border-cyan-500/30 text-cyan-400 flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                                            HELMET: UNLATCHED
+                                        </span>
+                                        <span class="bg-black/75 px-2 py-0.5 rounded border border-emerald-500/30 text-emerald-300 font-bold flex items-center gap-1">
+                                            <i class="fas fa-check-double text-[9px]"></i>
+                                            FACIAL ID: 99.4%
+                                        </span>
+                                    </div>
+
+                                    <!-- Subtle Corner Brackets around the photo frame -->
+                                    <div class="flex justify-between items-end text-[9px] font-mono-tech">
+                                        <span class="text-cyan-400/80 bg-black/60 px-1.5 py-0.5 rounded">SANJJEY ARUMUGAM</span>
+                                        <span class="text-cyan-300 bg-cyan-950/80 border border-cyan-400/50 px-2 py-0.5 rounded font-hud tracking-wider animate-pulse">
+                                            [ CLICK TO CLOSE HELMET ]
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- ========================================================= -->
+                                <!-- MECHANICAL HELMET FACEPLATE PLATES (UPPER & LOWER) -->
+                                <!-- ========================================================= -->
+                                
+                                <!-- Upper Helmet Faceplate Plate (Visor & Forehead) -->
+                                <div id="helmet-plate-top" class="absolute top-0 left-0 w-full h-[55%] z-20 bg-gradient-to-b from-[#091526] via-[#0b1c33] to-[#0d223d] border-b-2 border-cyan-400 shadow-[0_10px_25px_rgba(0,0,0,0.8)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between p-4 overflow-hidden">
+                                    <!-- Metallic Panel Seams & Corner Accents -->
+                                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,242,254,0.15)_0%,transparent_70%)] pointer-events-none"></div>
+                                    <div class="flex justify-between items-center text-[9px] font-mono-tech text-cyan-400/70 border-b border-cyan-500/20 pb-1 relative z-10">
+                                        <span>TITANIUM MK-IV</span>
+                                        <span>STATUS: SEALED</span>
+                                    </div>
+
+                                    <!-- Glowing Cyan Optic Visor Slit (Like futuristic helmet scanner) -->
+                                    <div class="my-auto relative z-10 flex flex-col items-center">
+                                        <div class="w-48 h-3.5 rounded-full bg-cyan-950 border border-cyan-400/80 p-0.5 relative overflow-hidden shadow-[0_0_15px_rgba(0,242,254,0.7)] flex items-center justify-center">
+                                            <div class="w-full h-full bg-gradient-to-r from-cyan-400 via-sky-200 to-cyan-400 rounded-full animate-pulse"></div>
+                                            <div class="laser-line"></div>
+                                        </div>
+                                        <div class="text-[9px] font-hud text-cyan-300 tracking-widest mt-2 uppercase">OPTIC SCANNER ACTIVE</div>
+                                    </div>
+
+                                    <!-- Interlocking seam at bottom edge -->
+                                    <div class="w-full flex justify-center relative z-10">
+                                        <div class="w-16 h-2 bg-cyan-500/30 border-t border-cyan-400 rounded-t"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Lower Helmet Faceplate Plate (Jaw & Chin Shield) -->
+                                <div id="helmet-plate-bottom" class="absolute bottom-0 left-0 w-full h-[45%] z-20 bg-gradient-to-t from-[#060e1a] via-[#091629] to-[#0c1f38] border-t-2 border-cyan-400 shadow-[0_-10px_25px_rgba(0,0,0,0.8)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between p-4 overflow-hidden">
+                                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(0,242,254,0.12)_0%,transparent_70%)] pointer-events-none"></div>
+                                    
+                                    <!-- Ventilation / Exhaust Grilles -->
+                                    <div class="flex justify-center gap-2 pt-2 relative z-10">
+                                        <span class="w-4 h-1 bg-cyan-500/40 rounded-full"></span>
+                                        <span class="w-7 h-1 bg-cyan-400 rounded-full"></span>
+                                        <span class="w-4 h-1 bg-cyan-500/40 rounded-full"></span>
+                                    </div>
+
+                                    <!-- Action Prompt -->
+                                    <div class="text-center bg-cyan-950/70 border border-cyan-400/50 py-1.5 px-3 rounded backdrop-blur-md relative z-10">
+                                        <div class="font-hud text-xs text-cyan-300 font-bold flex items-center justify-center gap-2">
+                                            <i class="fas fa-unlock text-cyan-400 animate-pulse"></i>
+                                            <span>TOUCH TO OPEN HELMET</span>
+                                        </div>
+                                        <div class="font-mono-tech text-[8px] text-gray-400 mt-0.5">HYDRAULIC ACTUATOR READY</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Pod Footer Telemetry -->
+                            <div class="mt-3 text-center font-mono-tech text-[10px] text-cyan-400/70 flex items-center justify-center gap-4">
+                                <span>MK-IV PNEUMATICS</span>
+                                <span>//</span>
+                                <span id="helmet-status-text">HELMET: SEALED</span>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-32 text-center reveal">
-            <div class="container mx-auto px-6 max-w-2xl">
-                <p class="font-mono text-[#64ffda] mb-4">05. What's Next?</p>
-                <h2 class="text-4xl md:text-5xl font-bold text-[#ccd6f6] mb-6">Get In Touch</h2>
-                <p class="text-[#8892b0] mb-12 text-lg leading-relaxed">
-                    Whether you need to architect a robust backend service, train a predictive AI model, or integrate both into a seamless application, I'm open to new opportunities. Let's build something great.
-                </p>
-                <a href="mailto:sanjjeyarumugam@gmail.com" class="inline-block border-2 border-[#64ffda] text-[#64ffda] text-lg font-mono py-4 px-10 rounded hover:bg-[#64ffda] hover:bg-opacity-10 transition duration-300">
-                    Say Hello
-                </a>
+        <!-- ================= SECTION 01: INTEL & PROFILE SUMMARY ================= -->
+        <section id="about" class="py-24 relative">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <!-- Section Header -->
+                <div class="flex items-center gap-4 mb-12 reveal-node">
+                    <span class="font-hud text-2xl text-cyan-400 font-bold">01.</span>
+                    <h2 class="text-3xl font-hud font-bold text-white tracking-wide">OPERATIONAL INTEL</h2>
+                    <div class="flex-grow h-px bg-gradient-to-r from-cyan-500/40 via-cyan-500/10 to-transparent"></div>
+                    <span class="font-mono-tech text-xs text-cyan-400/60 hidden sm:inline">[DOSSIER // DECLASSIFIED]</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+                    <!-- Intel Description -->
+                    <div class="md:col-span-7 tech-panel p-8 rounded-lg space-y-5 reveal-node">
+                        <div class="flex items-center justify-between border-b border-cyan-500/20 pb-3">
+                            <span class="font-hud text-sm text-cyan-300 font-bold">EXECUTIVE PROFILE</span>
+                            <span class="font-mono-tech text-xs text-emerald-400"><i class="fas fa-check-circle"></i> VERIFIED CANDIDATE</span>
+                        </div>
+                        <p class="text-gray-300 text-base leading-relaxed">
+                            Final-year <strong class="text-white">B.Tech CSE (Artificial Intelligence)</strong> student at <strong class="text-cyan-300">Amrita Vishwa Vidyapeetham</strong> (CGPA: 8.17), passionate about building scalable full-stack applications and real-world software solutions.
+                        </p>
+                        <p class="text-gray-300 text-base leading-relaxed">
+                            Experienced in backend development, database management, frontend technologies, and AI-driven systems with production-level projects. Demonstrated track record building defense-grade OSINT pipelines at the <span class="text-cyan-300 font-semibold">Anti Terrorism Squad (Tamil Nadu)</span>, where I engineered local RAG workflows, automated scrapers, and contradiction resolution engines.
+                        </p>
+                        <p class="text-gray-300 text-base leading-relaxed">
+                            Recognized for strong problem-solving and collaboration skills through multiple national-level hackathon wins, IEEE publications, and leadership roles in technical communities.
+                        </p>
+
+                        <!-- Key metrics readout -->
+                        <div class="grid grid-cols-3 gap-3 pt-4 border-t border-cyan-500/20 text-center font-mono-tech">
+                            <div class="p-2.5 rounded bg-black/40 border border-cyan-500/20">
+                                <div class="text-2xl font-bold text-cyan-300 font-hud">8.17</div>
+                                <div class="text-[10px] text-gray-400">AMRITA CGPA</div>
+                            </div>
+                            <div class="p-2.5 rounded bg-black/40 border border-cyan-500/20">
+                                <div class="text-2xl font-bold text-emerald-400 font-hud">7+</div>
+                                <div class="text-[10px] text-gray-400">OSINT INTEL FEEDS</div>
+                            </div>
+                            <div class="p-2.5 rounded bg-black/40 border border-cyan-500/20">
+                                <div class="text-2xl font-bold text-sky-400 font-hud">100x</div>
+                                <div class="text-[10px] text-gray-400">MANIM SPEEDUP</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side HUD Specs & Coordinates -->
+                    <div class="md:col-span-5 space-y-4 reveal-node">
+                        <!-- Contact Telemetry Card -->
+                        <div class="tech-panel p-6 rounded-lg space-y-4">
+                            <div class="font-hud text-xs text-cyan-400 font-bold tracking-wider flex items-center justify-between">
+                                <span>CONTACT TELEMETRY</span>
+                                <i class="fas fa-signal text-emerald-400"></i>
+                            </div>
+
+                            <div class="space-y-3 font-mono-tech text-xs">
+                                <div class="flex items-center gap-3 text-gray-300">
+                                    <div class="w-8 h-8 rounded bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <div class="text-[10px] text-gray-400">PRIMARY EMAIL</div>
+                                        <a href="mailto:sanjjeyarumugam@gmail.com" class="text-cyan-300 hover:underline truncate block">sanjjeyarumugam@gmail.com</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-3 text-gray-300">
+                                    <div class="w-8 h-8 rounded bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] text-gray-400">SECURE COMMS</div>
+                                        <span class="text-white">+91 9443582753</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-3 text-gray-300">
+                                    <div class="w-8 h-8 rounded bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                                        <i class="fas fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] text-gray-400">OPERATIONAL BASE</div>
+                                        <span class="text-white">Chennai, Tamil Nadu, India</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Core Strengths -->
+                        <div class="tech-panel p-6 rounded-lg space-y-3">
+                            <div class="font-hud text-xs text-cyan-400 font-bold tracking-wider">
+                                SOFT SKILLS & METHODOLOGY
+                            </div>
+                            <div class="flex flex-wrap gap-2 font-mono-tech text-xs">
+                                <span class="px-3 py-1 bg-cyan-950/70 border border-cyan-500/30 rounded text-cyan-300"><i class="fas fa-comments text-[10px] mr-1"></i> Communication</span>
+                                <span class="px-3 py-1 bg-cyan-950/70 border border-cyan-500/30 rounded text-cyan-300"><i class="fas fa-lightbulb text-[10px] mr-1"></i> Problem-Solving</span>
+                                <span class="px-3 py-1 bg-cyan-950/70 border border-cyan-500/30 rounded text-cyan-300"><i class="fas fa-shuffle text-[10px] mr-1"></i> Adaptability</span>
+                                <span class="px-3 py-1 bg-cyan-950/70 border border-cyan-500/30 rounded text-cyan-300"><i class="fas fa-users text-[10px] mr-1"></i> Team Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- ================= SECTION 02: TECHNICAL ARSENAL (SKILLS) ================= -->
+        <section id="skills" class="py-24 relative bg-[#040913]">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <!-- Header -->
+                <div class="flex items-center gap-4 mb-12 reveal-node">
+                    <span class="font-hud text-2xl text-cyan-400 font-bold">02.</span>
+                    <h2 class="text-3xl font-hud font-bold text-white tracking-wide">TECHNICAL ARSENAL</h2>
+                    <div class="flex-grow h-px bg-gradient-to-r from-cyan-500/40 via-cyan-500/10 to-transparent"></div>
+                    <span class="font-mono-tech text-xs text-cyan-400/60 hidden sm:inline">[SYS_MODULES // LOADED]</span>
+                </div>
+
+                <!-- 6 Skill Cards directly matching resume -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- 1. Languages -->
+                    <div class="tech-panel p-6 rounded-lg reveal-node group" data-sound="blip">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition">
+                                <i class="fas fa-code text-lg"></i>
+                            </div>
+                            <span class="font-mono-tech text-[10px] text-cyan-400/70">CAT_01</span>
+                        </div>
+                        <h3 class="font-hud text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition">Languages</h3>
+                        <p class="text-gray-400 text-xs font-mono-tech mb-4">Core syntax for high-performance engineering & queries.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">Python</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">SQL</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">JavaScript (ES6+)</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. AI / ML & Intelligence -->
+                    <div class="tech-panel p-6 rounded-lg reveal-node group" data-sound="blip">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition">
+                                <i class="fas fa-brain text-lg"></i>
+                            </div>
+                            <span class="font-mono-tech text-[10px] text-cyan-400/70">CAT_02</span>
+                        </div>
+                        <h3 class="font-hud text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition">AI / ML & Intelligence</h3>
+                        <p class="text-gray-400 text-xs font-mono-tech mb-4">Generative models, local LLMs & neural architectures.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">PyTorch</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">RAG & Ollama</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">GenAI & LangChain</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Hugging Face</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">OpenCV & GANs</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Pandas</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Backend Architecture -->
+                    <div class="tech-panel p-6 rounded-lg reveal-node group" data-sound="blip">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition">
+                                <i class="fas fa-server text-lg"></i>
+                            </div>
+                            <span class="font-mono-tech text-[10px] text-cyan-400/70">CAT_03</span>
+                        </div>
+                        <h3 class="font-hud text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition">Backend Architecture</h3>
+                        <p class="text-gray-400 text-xs font-mono-tech mb-4">High-throughput microservices, REST APIs & runtimes.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">Flask</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">Node.js</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">Express.js</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">RESTful APIs</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Frontend Technologies -->
+                    <div class="tech-panel p-6 rounded-lg reveal-node group" data-sound="blip">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition">
+                                <i class="fas fa-desktop text-lg"></i>
+                            </div>
+                            <span class="font-mono-tech text-[10px] text-cyan-400/70">CAT_04</span>
+                        </div>
+                        <h3 class="font-hud text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition">Frontend Technologies</h3>
+                        <p class="text-gray-400 text-xs font-mono-tech mb-4">Interactive cyber surfaces & reactive interfaces.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">React.js</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">HTML5</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs font-semibold">CSS3</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">TailwindCSS</span>
+                        </div>
+                    </div>
+
+                    <!-- 5. Databases & Warehousing -->
+                    <div class="tech-panel p-6 rounded-lg reveal-node group" data-sound="blip">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition">
+                                <i class="fas fa-database text-lg"></i>
+                            </div>
+                            <span class="font-mono-tech text-[10px] text-cyan-400/70">CAT_05</span>
+                        </div>
+                        <h3 class="font-hud text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition">Databases & Warehousing</h3>
+                        <p class="text-gray-400 text-xs font-mono-tech mb-4">Relational modeling and vector storage</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">MySQL</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">MongoDB</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Supabase</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Snowflake</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">SQLite</span>
+                        </div>
+                    </div>
+
+                    <!-- 6. Tools & Automation -->
+                    <div class="tech-panel p-6 rounded-lg reveal-node group" data-sound="blip">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition">
+                                <i class="fas fa-wrench text-lg"></i>
+                            </div>
+                            <span class="font-mono-tech text-[10px] text-cyan-400/70">CAT_06</span>
+                        </div>
+                        <h3 class="font-hud text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition">DevOps & Automation</h3>
+                        <p class="text-gray-400 text-xs font-mono-tech mb-4">Deployment pipelines, scraping & automated flows.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Git & GitHub</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Playwright</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Postman</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">Vercel</span>
+                            <span class="px-2.5 py-1 rounded bg-black/60 border border-cyan-500/30 text-cyan-300 font-mono-tech text-xs">n8n</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 03: EXPERIENCE & OPERATIONS ================= -->
+        <section id="experience" class="py-24 relative">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <!-- Header -->
+                <div class="flex items-center gap-4 mb-12 reveal-node">
+                    <span class="font-hud text-2xl text-cyan-400 font-bold">03.</span>
+                    <h2 class="text-3xl font-hud font-bold text-white tracking-wide">OPERATIONAL EXPERIENCE</h2>
+                    <div class="flex-grow h-px bg-gradient-to-r from-cyan-500/40 via-cyan-500/10 to-transparent"></div>
+                    <span class="font-mono-tech text-xs text-cyan-400/60 hidden sm:inline">[MISSION_LOG // ACTIVE]</span>
+                </div>
+
+                <!-- Timeline / Experience Cards -->
+                <div class="space-y-8">
+                    
+                    <!-- 1. Primary: Anti Terrorism Squad AI Intern -->
+                    <div class="tech-panel p-8 rounded-lg border-l-4 border-l-cyan-400 reveal-node relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-6 opacity-5 pointer-events-none">
+                            <i class="fas fa-shield-halved text-9xl text-cyan-400"></i>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 border-b border-cyan-500/20 pb-4">
+                            <div>
+                                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-cyan-950/80 border border-cyan-400/50 text-cyan-300 font-mono-tech text-[11px] mb-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span>SPECIAL OPERATIONS // DEFENSE AI</span>
+                                </div>
+                                <h3 class="font-hud text-2xl font-bold text-white flex items-center gap-2">
+                                    AI Intern <span class="text-cyan-400">@ Anti Terrorism Squad</span>
+                                </h3>
+                                <div class="font-mono-tech text-sm text-gray-400">Government of Tamil Nadu, Chennai, India</div>
+                            </div>
+                            <div class="font-mono-tech text-sm text-cyan-300 font-bold bg-black/50 px-3 py-1.5 rounded border border-cyan-500/30">
+                                04/2026 – 06/2026
+                            </div>
+                        </div>
+
+                        <!-- Highlights from resume -->
+                        <div class="space-y-4 text-gray-300 text-sm leading-relaxed mt-4">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-terminal text-cyan-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white">Kangal OSINT Platform:</strong> Developed <span class="text-cyan-300">Kangal</span>, an AI-driven OSINT intelligence platform for collecting, parsing, and summarizing situational news across <strong class="text-white">7+ social media channels</strong> and public news sources.
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-robot text-cyan-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white">Automated Pipeline:</strong> Implemented automated scraping and real-time ingestion pipelines using <span class="text-cyan-300 font-mono">Playwright</span>, <span class="text-cyan-300 font-mono">Reddit API</span>, and syndication RSS feeds.
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-file-shield text-cyan-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white">AI Investigation Assistant:</strong> Built an AI-driven case investigation assistant that <strong class="text-emerald-400 font-bold">automated evidence-to-statute mapping and case contradiction analysis</strong>.
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-network-wired text-cyan-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white">Local Air-Gapped RAG System:</strong> Integrated <span class="text-cyan-300 font-mono">Ollama</span>, <span class="text-cyan-300 font-mono">SQLite</span>, <span class="text-cyan-300 font-mono">networkx</span>, and custom Python-based file parsers to build a secure RAG system capable of extracting evidence from forensic documents, mapping facts directly to criminal statutes, generating investigative workflows, and discovering hidden contradictions—engineered to run entirely locally for air-gapped defense security.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tech Pills -->
+                        <div class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-cyan-500/20 font-mono-tech text-xs">
+                            <span class="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">Ollama (Local LLM)</span>
+                            <span class="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">RAG Architecture</span>
+                            <span class="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">Playwright</span>
+                            <span class="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">NetworkX Graphs</span>
+                            <span class="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">SQLite</span>
+                            <span class="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">OSINT Intelligence</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Leadership: Neuronix Club Platform Developer -->
+                    <div class="tech-panel p-8 rounded-lg border-l-4 border-l-sky-500 reveal-node">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 border-b border-cyan-500/20 pb-4">
+                            <div>
+                                <h3 class="font-hud text-xl font-bold text-white">
+                                    Event Co-Manager & Platform Developer <span class="text-sky-400">@ Neuronix Club</span>
+                                </h3>
+                                <div class="font-mono-tech text-sm text-gray-400">Amrita Vishwa Vidyapeetham</div>
+                            </div>
+                            <div class="font-mono-tech text-sm text-sky-300 bg-black/50 px-3 py-1.5 rounded border border-sky-500/30">
+                                2024 – 2025
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Co-managed a major university technical event, overseeing end-to-end execution. Designed and architected a custom web compiler and execution platform specifically tailored for a unique jumbled-code programming challenge. Successfully onboarded <strong class="text-white">over 500 participants</strong> and hosted live execution sandboxes for finalist teams.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 04: FEATURED SYSTEMS & HOLOGRAPHIC UNRAVELING ================= -->
+        <section id="projects" class="py-24 relative bg-[#040913]">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <!-- Header -->
+                <div class="flex items-center gap-4 mb-12 reveal-node">
+                    <span class="font-hud text-2xl text-cyan-400 font-bold">04.</span>
+                    <h2 class="text-3xl font-hud font-bold text-white tracking-wide">FEATURED SYSTEMS</h2>
+                    <div class="flex-grow h-px bg-gradient-to-r from-cyan-500/40 via-cyan-500/10 to-transparent"></div>
+                    <span class="font-mono-tech text-xs text-cyan-400/60 hidden sm:inline">[HOLOGRAPHIC_SCHEMATICS]</span>
+                </div>
+
+                <p class="text-gray-400 font-mono-tech text-xs mb-8">
+                    <i class="fas fa-info-circle text-cyan-400 mr-1"></i> Click <strong class="text-cyan-300">[UNRAVEL HOLOGRAPHIC SPEC]</strong> on any project to deploy a dynamic 3D blueprint modal.
+                </p>
+
+                <!-- Project Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- PROJECT 1: Vidi-Q -->
+                    <div class="tech-panel p-7 rounded-lg reveal-node flex flex-col justify-between group relative overflow-hidden" id="card-vidiq">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-cyan-400">
+                            <i class="fas fa-film text-7xl"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-mono-tech text-[10px] text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/40">
+                                    SYS_01 // GENAI VIDEO
+                                </span>
+                                <div class="flex items-center gap-3">
+                                    <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-cyan-300 transition" title="GitHub Code">
+                                        <i class="fab fa-github text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <h3 class="font-hud text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition">
+                                Vidi-Q: AI Video Engine
+                            </h3>
+                            <div class="font-mono-tech text-xs text-cyan-400/80 mb-4">
+                                Gemini LLM // Manim Engine // Python Auto-Healer
+                            </div>
+
+                            <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                                Designed an autonomous AI video generation platform utilizing Google Gemini to write structured Manim-Python scripts for animated STEM lectures. Features an automated AST auto-healing loop that catches syntax and runtime exceptions to fix code before final rendering.
+                            </p>
+                        </div>
+
+                        <div>
+                            <!-- Metric Badge -->
+                            <div class="bg-cyan-950/40 border border-cyan-500/30 rounded p-3 mb-5 flex items-center justify-between font-mono-tech text-xs">
+                                <span class="text-gray-300"><i class="fas fa-bolt text-amber-400 mr-1.5"></i> Throughput Gain:</span>
+                                <span class="text-emerald-400 font-bold">100x Faster than Generic AI</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mb-5 font-mono-tech text-[11px] text-gray-400">
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Gemini Pro API</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Manim Animation</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">AST Self-Healing</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Docker</span>
+                            </div>
+
+                            <!-- Hologram Unravel Button -->
+                            <button onclick="unravelHologram('vidiq', this)" class="btn-tech w-full py-2.5 rounded font-mono-tech text-xs font-bold tracking-wider flex items-center justify-center gap-2">
+                                <i class="fas fa-cubes text-xs"></i>
+                                <span>UNRAVEL HOLOGRAPHIC SPEC</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 2: Osteoarthritis GAN -->
+                    <div class="tech-panel p-7 rounded-lg reveal-node flex flex-col justify-between group relative overflow-hidden" id="card-osteo">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-cyan-400">
+                            <i class="fas fa-bone text-7xl"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-mono-tech text-[10px] text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/40">
+                                    SYS_02 // DEEP MEDTECH
+                                </span>
+                                <div class="flex items-center gap-3">
+                                    <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-cyan-300 transition" title="GitHub Code">
+                                        <i class="fab fa-github text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <h3 class="font-hud text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition">
+                                Osteoarthritis Progression
+                            </h3>
+                            <div class="font-mono-tech text-xs text-cyan-400/80 mb-4">
+                                Conditional GAN (cGAN) // PyTorch // Medical Vision
+                            </div>
+
+                            <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                                Engineered a medical predictive synthesis engine employing conditional GANs (cGAN) in PyTorch. Unlike standard discrete classifiers, this architecture synthesizes continuous knee X-ray progressions across 5 consecutive severity stages (Stage-0 to Stage-4).
+                            </p>
+                        </div>
+
+                        <div>
+                            <!-- Metric Badge -->
+                            <div class="bg-cyan-950/40 border border-cyan-500/30 rounded p-3 mb-5 flex items-center justify-between font-mono-tech text-xs">
+                                <span class="text-gray-300"><i class="fas fa-chart-line text-cyan-400 mr-1.5"></i> Clinical Impact:</span>
+                                <span class="text-cyan-300 font-bold">Continuous 5-Stage Disease Prognosis</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mb-5 font-mono-tech text-[11px] text-gray-400">
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">PyTorch</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">cGAN</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Computer Vision</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Latent Space Projection</span>
+                            </div>
+
+                            <!-- Hologram Unravel Button -->
+                            <button onclick="unravelHologram('osteo', this)" class="btn-tech w-full py-2.5 rounded font-mono-tech text-xs font-bold tracking-wider flex items-center justify-center gap-2">
+                                <i class="fas fa-cubes text-xs"></i>
+                                <span>UNRAVEL HOLOGRAPHIC SPEC</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 3: Kangal OSINT Platform (ATS TN) -->
+                    <div class="tech-panel p-7 rounded-lg reveal-node flex flex-col justify-between group relative overflow-hidden" id="card-kangal">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-cyan-400">
+                            <i class="fas fa-eye text-7xl"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-mono-tech text-[10px] text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/40">
+                                    SYS_03 // DEFENSE OSINT
+                                </span>
+                                <span class="text-emerald-400 font-mono-tech text-[10px]"><i class="fas fa-lock text-[9px]"></i> LOCAL SECURE</span>
+                            </div>
+
+                            <h3 class="font-hud text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition">
+                                Kangal: AI OSINT Platform
+                            </h3>
+                            <div class="font-mono-tech text-xs text-cyan-400/80 mb-4">
+                                Local RAG // Ollama // NetworkX Legal Graph
+                            </div>
+
+                            <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                                Multi-stream Open Source Intelligence aggregator developed for ATS Tamil Nadu. Scrapes 7+ social and news feeds, maps unstructured case evidence directly to criminal legal statutes, and resolves factual contradictions air-gapped from cloud vendors.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="bg-cyan-950/40 border border-cyan-500/30 rounded p-3 mb-5 flex items-center justify-between font-mono-tech text-xs">
+                                <span class="text-gray-300"><i class="fas fa-shield text-emerald-400 mr-1.5"></i> Documentation:</span>
+                                <span class="text-emerald-400 font-bold">Automated Evidence Synthesis</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mb-5 font-mono-tech text-[11px] text-gray-400">
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Playwright</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Ollama</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">NetworkX Graph</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">SQLite</span>
+                            </div>
+
+                            <button onclick="unravelHologram('kangal', this)" class="btn-tech w-full py-2.5 rounded font-mono-tech text-xs font-bold tracking-wider flex items-center justify-center gap-2">
+                                <i class="fas fa-cubes text-xs"></i>
+                                <span>UNRAVEL HOLOGRAPHIC SPEC</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 4: IEEE Publication Pipeline (QR Code Encryption) -->
+                    <div class="tech-panel p-7 rounded-lg reveal-node flex flex-col justify-between group relative overflow-hidden" id="card-qrcode">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition text-cyan-400">
+                            <i class="fas fa-qrcode text-7xl"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-mono-tech text-[10px] text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded bg-cyan-950/40">
+                                    SYS_04 // CRYPTOGRAPHY
+                                </span>
+                                <a href="https://doi.org/10.1109/IConSCEPT61884.2024.10627798" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white text-xs font-mono-tech flex items-center gap-1">
+                                    <span>IEEE DOI</span> <i class="fas fa-external-link-alt text-[10px]"></i>
+                                </a>
+                            </div>
+
+                            <h3 class="font-hud text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition">
+                                QR Encryption via LU & PCA
+                            </h3>
+                            <div class="font-mono-tech text-xs text-cyan-400/80 mb-4">
+                                IEEE Published Paper // Linear Algebra // Cryptography
+                            </div>
+
+                            <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                                Novel cryptographic framework utilizing Lower-Upper (LU) Matrix Decomposition and Principal Component Analysis (PCA) to encrypt sensitive QR code payloads while preserving scan integrity against visual attacks. Won <strong>Best Paper Award</strong> at IEEE ICONScept 2024.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="bg-cyan-950/40 border border-cyan-500/30 rounded p-3 mb-5 flex items-center justify-between font-mono-tech text-xs">
+                                <span class="text-gray-300"><i class="fas fa-award text-amber-400 mr-1.5"></i> Distinction:</span>
+                                <span class="text-amber-300 font-bold">Best Paper Award @ IEEE</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mb-5 font-mono-tech text-[11px] text-gray-400">
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">LU Decomposition</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">PCA</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">Python NumPy</span>
+                                <span class="bg-black/50 px-2 py-1 rounded border border-gray-800 text-cyan-300">IEEE Scopus</span>
+                            </div>
+
+                            <button onclick="unravelHologram('qrcode', this)" class="btn-tech w-full py-2.5 rounded font-mono-tech text-xs font-bold tracking-wider flex items-center justify-center gap-2">
+                                <i class="fas fa-cubes text-xs"></i>
+                                <span>UNRAVEL HOLOGRAPHIC SPEC</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 05: ACADEMICS, CERTIFICATIONS & AWARDS ================= -->
+        <section id="education" class="py-24 relative">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <!-- Header -->
+                <div class="flex items-center gap-4 mb-12 reveal-node">
+                    <span class="font-hud text-2xl text-cyan-400 font-bold">05.</span>
+                    <h2 class="text-3xl font-hud font-bold text-white tracking-wide">CREDENTIALS & HONORS</h2>
+                    <div class="flex-grow h-px bg-gradient-to-r from-cyan-500/40 via-cyan-500/10 to-transparent"></div>
+                    <span class="font-mono-tech text-xs text-cyan-400/60 hidden sm:inline">[ACADEMICS // VERIFIED]</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Left: Education & Certifications -->
+                    <div class="lg:col-span-6 space-y-6 reveal-node">
+                        <!-- Degree 1 -->
+                        <div class="tech-panel p-6 rounded-lg">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <span class="font-mono-tech text-[10px] text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">
+                                        UNDERGRADUATE DEGREE
+                                    </span>
+                                    <h3 class="font-hud text-lg font-bold text-white mt-1">B.Tech Computer Science (AI)</h3>
+                                    <div class="text-cyan-300 text-xs font-mono-tech">Amrita Vishwa Vidyapeetham, Chennai</div>
+                                </div>
+                                <span class="font-mono-tech text-xs text-gray-400">06/2023 – 05/2027</span>
+                            </div>
+                            <div class="flex items-center gap-3 mt-3 pt-3 border-t border-cyan-500/20 font-mono-tech text-xs">
+                                <span class="text-gray-400">Academic Standing:</span>
+                                <span class="text-emerald-400 font-bold text-sm">8.17 CGPA</span>
+                            </div>
+                        </div>
+
+                        <!-- Schooling -->
+                        <div class="tech-panel p-6 rounded-lg">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <span class="font-mono-tech text-[10px] text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">
+                                        HIGHER SECONDARY
+                                    </span>
+                                    <h3 class="font-hud text-lg font-bold text-white mt-1">Grade 12 - HSCE (PCM)</h3>
+                                    <div class="text-cyan-300 text-xs font-mono-tech">Chennai Public School, Chennai</div>
+                                </div>
+                                <span class="font-mono-tech text-xs text-gray-400">06/2022 – 04/2023</span>
+                            </div>
+                            <div class="flex items-center gap-3 mt-3 pt-3 border-t border-cyan-500/20 font-mono-tech text-xs">
+                                <span class="text-gray-400">Score:</span>
+                                <span class="text-emerald-400 font-bold text-sm">88.8% (444 / 500)</span>
+                            </div>
+                        </div>
+
+                        <!-- Specialized Certifications -->
+                        <div class="tech-panel p-6 rounded-lg space-y-3">
+                            <h4 class="font-hud text-sm text-cyan-400 font-bold tracking-wider mb-2">
+                                <i class="fas fa-certificate mr-1"></i> ADVANCED COURSES & TRAININGS
+                            </h4>
+                            <div class="space-y-3 font-mono-tech text-xs">
+                                <div class="p-2.5 rounded bg-black/40 border border-gray-800 flex justify-between items-center">
+                                    <div>
+                                        <div class="text-white font-semibold">Machine Learning & Data Processing</div>
+                                        <div class="text-cyan-400 text-[10px]">Amazon ML Summer School</div>
+                                    </div>
+                                    <span class="text-gray-500 text-[10px]">08/2025 – 09/2025</span>
+                                </div>
+                                <div class="p-2.5 rounded bg-black/40 border border-gray-800 flex justify-between items-center">
+                                    <div>
+                                        <div class="text-white font-semibold">Snowflake Hands-on Essentials</div>
+                                        <div class="text-cyan-400 text-[10px]">Snowflake Data Cloud</div>
+                                    </div>
+                                    <span class="text-gray-500 text-[10px]">01/2026 – 03/2026</span>
+                                </div>
+                                <div class="p-2.5 rounded bg-black/40 border border-gray-800 flex justify-between items-center">
+                                    <div>
+                                        <div class="text-white font-semibold">Google Foundation of Project Management</div>
+                                        <div class="text-cyan-400 text-[10px]">Coursera // Google Professional</div>
+                                    </div>
+                                    <span class="text-gray-500 text-[10px]">02/2025 – 03/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Awards & IEEE Publications -->
+                    <div class="lg:col-span-6 space-y-6 reveal-node">
+                        <!-- Hackathon Victories & Honors -->
+                        <div class="tech-panel p-6 rounded-lg space-y-4">
+                            <div class="flex items-center gap-3 border-b border-cyan-500/20 pb-3">
+                                <i class="fas fa-trophy text-amber-400 text-xl"></i>
+                                <h3 class="font-hud text-lg font-bold text-white">HONORS & HACKATHONS</h3>
+                            </div>
+
+                            <div class="space-y-3 font-mono-tech text-xs">
+                                <div class="p-3 rounded bg-black/40 border border-cyan-500/20 flex items-start gap-3">
+                                    <i class="fas fa-medal text-amber-400 mt-0.5"></i>
+                                    <div>
+                                        <div class="text-white font-bold">Winner - GenAI Hackathon 2025</div>
+                                        <div class="text-gray-400 text-[11px]">AI Practitioners Community // Google for Developers</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3 rounded bg-black/40 border border-cyan-500/20 flex items-start gap-3">
+                                    <i class="fas fa-medal text-amber-400 mt-0.5"></i>
+                                    <div>
+                                        <div class="text-white font-bold">Winner - Kyberastra 2025</div>
+                                        <div class="text-gray-400 text-[11px]">Amrita Cyber Nation Cybersecurity Hackathon</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3 rounded bg-black/40 border border-cyan-500/20 flex items-start gap-3">
+                                    <i class="fas fa-award text-cyan-400 mt-0.5"></i>
+                                    <div>
+                                        <div class="text-white font-bold">National-Level Semi-Finalist 2024</div>
+                                        <div class="text-gray-400 text-[11px]">Tata Imagination Challenge // Tata Groups</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3 rounded bg-black/40 border border-cyan-500/20 flex items-start gap-3">
+                                    <i class="fas fa-star text-cyan-300 mt-0.5"></i>
+                                    <div>
+                                        <div class="text-white font-bold">Best Paper Award 2024</div>
+                                        <div class="text-gray-400 text-[11px]">IEEE ICONScept Conference</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- IEEE Publication Card -->
+                        <div class="tech-panel p-6 rounded-lg space-y-4 border-2 border-cyan-500/40">
+                            <div class="flex items-center justify-between border-b border-cyan-500/20 pb-3">
+                                <div class="flex items-center gap-2 text-cyan-300 font-hud text-xs font-bold">
+                                    <i class="fas fa-book-bookmark"></i>
+                                    <span>IEEE PEER-REVIEWED PUBLICATION</span>
+                                </div>
+                                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 font-mono-tech text-[10px] border border-emerald-500/30">INDEXED</span>
+                            </div>
+
+                            <div>
+                                <h4 class="font-hud text-base font-bold text-white mb-1">
+                                    QR CODE ENCRYPTION USING LU DECOMPOSITION AND PCA
+                                </h4>
+                                <div class="text-xs font-mono-tech text-gray-400">
+                                    Published in: <strong class="text-cyan-300">IEEE, ICONScept (2024)</strong>
+                                </div>
+                            </div>
+
+                            <p class="text-gray-300 text-xs leading-relaxed">
+                                Formulates a novel mathematical obfuscation technique converting standard high-density matrix barcodes into encrypted representations resistant to visual inference attacks, while allowing authentic reconstruction via inverse PCA transformations.
+                            </p>
+
+                            <a href="https://doi.org/10.1109/IConSCEPT61884.2024.10627798" target="_blank" rel="noopener noreferrer" class="btn-tech w-full py-2 rounded font-mono-tech text-xs font-bold flex items-center justify-center gap-2">
+                                <span>ACCESS IEEE XPLORE DOCUMENT</span>
+                                <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 06: COMMS / GET IN TOUCH ================= -->
+        <section id="contact" class="py-32 relative text-center">
+            <div class="container mx-auto px-6 max-w-3xl reveal-node">
+                <!-- Glowing Reactor Ring Indicator -->
+                <div class="w-20 h-20 mx-auto mb-6 rounded-full arc-pulse bg-cyan-950/40 border-2 border-cyan-400 flex items-center justify-center">
+                    <i class="fas fa-satellite-dish text-2xl text-cyan-300"></i>
+                </div>
+
+                <span class="font-mono-tech text-xs text-cyan-400 uppercase tracking-widest">TRANSMISSION FREQUENCY READY</span>
+                <h2 class="font-hud text-4xl sm:text-5xl font-extrabold text-white tracking-tight mt-2 mb-6">
+                    INITIALIZE CONTACT
+                </h2>
+
+                <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-10">
+                    Whether you are seeking to engineer production-ready defense AI, architect scalable microservices with Flask & Node.js, or implement local RAG workflows with air-gapped security, my transmission line is open.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="mailto:sanjjeyarumugam@gmail.com" class="btn-tech px-8 py-4 rounded font-mono-tech text-sm font-bold tracking-widest flex items-center gap-3 w-full sm:w-auto justify-center" data-sound="click">
+                        <i class="fas fa-paper-plane text-xs"></i>
+                        <span>SEND TRANSMISSION</span>
+                    </a>
+                    <a href="tel:+919443582753" class="px-8 py-4 rounded bg-gray-900 border border-gray-700 hover:border-cyan-400 text-gray-300 hover:text-white font-mono-tech text-sm tracking-wider transition flex items-center gap-3 w-full sm:w-auto justify-center" data-sound="blip">
+                        <i class="fas fa-phone text-xs text-cyan-400"></i>
+                        <span>+91 9443582753</span>
+                    </a>
+                </div>
+
+                <!-- Channel Badges -->
+                <div class="flex justify-center items-center gap-6 mt-12 text-gray-400 font-mono-tech text-xs">
+                    <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 transition flex items-center gap-1.5" data-sound="blip">
+                        <i class="fab fa-linkedin text-sm"></i> <span>LinkedIn</span>
+                    </a>
+                    <span>//</span>
+                    <a href="https://github.com/sanjjey" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 transition flex items-center gap-1.5" data-sound="blip">
+                        <i class="fab fa-github text-sm"></i> <span>GitHub</span>
+                    </a>
+                    <span>//</span>
+                    <a href="https://leetcode.com/u/sanjjey/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 transition flex items-center gap-1.5" data-sound="blip">
+                        <i class="fas fa-code text-sm"></i> <span>LeetCode</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="py-8 text-center text-[#8892b0] font-mono text-xs reveal">
-        <div class="flex justify-center space-x-6 mb-6 md:hidden">
-            <a href="mailto:sanjjeyarumugam@gmail.com" class="hover:text-[#64ffda]"><i class="fas fa-envelope fa-xl"></i></a>
-            <a href="https://www.linkedin.com/in/sanjjeyarumugam/" target="_blank" class="hover:text-[#64ffda]"><i class="fab fa-linkedin fa-xl"></i></a>
-            <a href="https://github.com/sanjjey" target="_blank" class="hover:text-[#64ffda]"><i class="fab fa-github fa-xl"></i></a>
-            <a href="https://leetcode.com/u/sanjjey/" target="_blank" class="hover:text-[#64ffda]"><i class="fas fa-code fa-xl"></i></a>
+    <!-- ========================================================================= -->
+    <!-- 5. HOLOGRAPHIC ENLARGEMENT MODAL (UNRAVEL FROM SMALL POINT) -->
+    <!-- ========================================================================= -->
+    <div id="hologram-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <!-- Hologram Viewport -->
+        <div id="hologram-content" class="tech-panel w-full max-w-3xl rounded-xl border-2 border-cyan-400 bg-[#061222]/95 shadow-[0_0_50px_rgba(0,242,254,0.3)] p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto transform scale-0">
+            
+            <!-- Blueprint Scanning Beam -->
+            <div class="laser-line"></div>
+
+            <!-- Header -->
+            <div class="flex justify-between items-start border-b border-cyan-500/30 pb-4 mb-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 font-mono-tech text-[10px] border border-cyan-500/40 mb-1">
+                        <i class="fas fa-atom animate-spin"></i>
+                        <span>HOLOGRAPHIC BLUEPRINT DEPLOYED</span>
+                    </div>
+                    <h3 id="holo-title" class="font-hud text-2xl font-bold text-white">SYSTEM BLUEPRINT</h3>
+                    <p id="holo-subtitle" class="font-mono-tech text-xs text-cyan-300/80">TECHNICAL SCHEMATIC & PIPELINE SPECIFICATION</p>
+                </div>
+
+                <button onclick="closeHologram()" class="w-8 h-8 rounded bg-cyan-950/80 border border-cyan-400 text-cyan-300 hover:text-white hover:bg-red-950 hover:border-red-400 transition flex items-center justify-center" title="Collapse Hologram">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Dynamic Hologram Body (Loaded via JS) -->
+            <div id="holo-body" class="space-y-6">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="mt-8 pt-4 border-t border-cyan-500/20 flex flex-col sm:flex-row justify-between items-center gap-3 font-mono-tech text-xs">
+                <span class="text-gray-400 text-[11px]"><i class="fas fa-shield-halved text-cyan-400 mr-1"></i> VERIFIED ON HARDWARE // TAMIL NADU / AMRITA</span>
+                <button onclick="closeHologram()" class="btn-tech px-5 py-2 rounded text-xs font-bold">
+                    [ COLLAPSE HOLOGRAPHIC SPEC ]
+                </button>
+            </div>
         </div>
-        <p class="hover:text-[#64ffda] transition cursor-pointer">Designed & Built by Sanjjey Arumugam</p>
-        <p class="mt-2 opacity-50">AI Research & Full-Stack Infrastructure</p>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- 6. HIGH-TECH FOOTER -->
+    <!-- ========================================================================= -->
+    <footer class="py-8 border-t border-cyan-500/20 bg-[#03070d] font-mono-tech text-xs text-gray-500 text-center relative z-10">
+        <div class="container mx-auto px-6 space-y-2">
+            <div class="flex items-center justify-center gap-2 text-cyan-400">
+                <i class="fas fa-microchip"></i>
+                <span class="font-hud font-bold tracking-wider">ADVANCED AI & FULL-STACK ARCHITECTURE // SANJJEY ARUMUGAM</span>
+            </div>
+            <p class="text-gray-400">Amrita Vishwa Vidyapeetham // Anti Terrorism Squad TN Intern // IEEE Published Author</p>
+            <p class="text-[10px] text-gray-600">NEURAL PROTOCOL INITIALIZED // ZERO EXTERNAL ASSET DEPENDENCIES</p>
+        </div>
     </footer>
 
+    <!-- ========================================================================= -->
+    <!-- 7. SCRIPT LOGIC: WEB AUDIO API, BOOT SEQUENCE, HOLOGRAPHIC UNRAVELING -->
+    <!-- ========================================================================= -->
     <script>
-        // Mobile Navbar Toggle
-        document.getElementById('nav-toggle').onclick = function(){
-            document.getElementById("nav-content").classList.toggle("hidden");
-        }
+        /* =====================================================================
+           A. PURE WEB AUDIO API SYNTHESIZER (ZERO EXTERNAL SOUND FILES)
+           ===================================================================== */
+        class TechAudioSynthesizer {
+            constructor() {
+                this.audioCtx = null;
+                this.enabled = true;
+            }
 
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
-        
-        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            });
-        }, revealOptions);
-
-        revealElements.forEach(el => revealOnScroll.observe(el));
-
-        // Typewriter Effect for Hero Section
-        const phrases = ["intelligent models.", "scalable APIs.", "full-stack apps."];
-        let i = 0;
-        let j = 0;
-        let currentPhrase = [];
-        let isDeleting = false;
-        const typeTarget = document.getElementById('typewriter');
-
-        function loop() {
-            typeTarget.innerHTML = currentPhrase.join('');
-            if (i < phrases.length) {
-                if (!isDeleting && j <= phrases[i].length) {
-                    currentPhrase.push(phrases[i][j]);
-                    j++;
-                    typeTarget.innerHTML = currentPhrase.join('');
+            init() {
+                if (!this.audioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContextClass) {
+                        this.audioCtx = new AudioContextClass();
+                    }
                 }
-                if (isDeleting && j <= phrases[i].length) {
-                    currentPhrase.pop(phrases[i][j]);
-                    j--;
-                    typeTarget.innerHTML = currentPhrase.join('');
-                }
-                if (j == phrases[i].length) {
-                    isDeleting = true;
-                    setTimeout(loop, 2000); // Wait before deleting
-                    return;
-                }
-                if (isDeleting && j === 0) {
-                    currentPhrase = [];
-                    isDeleting = false;
-                    i++;
-                    if (i == phrases.length) i = 0; // Reset array index
+                if (this.audioCtx && this.audioCtx.state === 'suspended') {
+                    this.audioCtx.resume();
                 }
             }
-            const speed = isDeleting ? 50 : 100;
-            setTimeout(loop, speed);
+
+            playBlip(frequency = 1600, duration = 0.04) {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.audioCtx) return;
+                    const osc = this.audioCtx.createOscillator();
+                    const gain = this.audioCtx.createGain();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(frequency, this.audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(frequency * 0.5, this.audioCtx.currentTime + duration);
+
+                    gain.gain.setValueAtTime(0.08, this.audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + duration);
+
+                    osc.connect(gain);
+                    gain.connect(this.audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(this.audioCtx.currentTime + duration);
+                } catch(e) {}
+            }
+
+            playClick() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.audioCtx) return;
+                    const osc = this.audioCtx.createOscillator();
+                    const gain = this.audioCtx.createGain();
+
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(800, this.audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(150, this.audioCtx.currentTime + 0.06);
+
+                    gain.gain.setValueAtTime(0.12, this.audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + 0.06);
+
+                    osc.connect(gain);
+                    gain.connect(this.audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(this.audioCtx.currentTime + 0.06);
+                } catch(e) {}
+            }
+
+            playHologramDeploy() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.audioCtx) return;
+                    const osc1 = this.audioCtx.createOscillator();
+                    const osc2 = this.audioCtx.createOscillator();
+                    const gain = this.audioCtx.createGain();
+
+                    osc1.type = 'sine';
+                    osc2.type = 'sawtooth';
+
+                    osc1.frequency.setValueAtTime(300, this.audioCtx.currentTime);
+                    osc1.frequency.exponentialRampToValueAtTime(1900, this.audioCtx.currentTime + 0.28);
+
+                    osc2.frequency.setValueAtTime(150, this.audioCtx.currentTime);
+                    osc2.frequency.exponentialRampToValueAtTime(950, this.audioCtx.currentTime + 0.28);
+
+                    gain.gain.setValueAtTime(0.01, this.audioCtx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.12, this.audioCtx.currentTime + 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + 0.32);
+
+                    osc1.connect(gain);
+                    osc2.connect(gain);
+                    gain.connect(this.audioCtx.destination);
+
+                    osc1.start();
+                    osc2.start();
+                    osc1.stop(this.audioCtx.currentTime + 0.32);
+                    osc2.stop(this.audioCtx.currentTime + 0.32);
+                } catch(e) {}
+            }
+
+            playVisorUnlatch() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    if (!this.audioCtx) return;
+                    const osc = this.audioCtx.createOscillator();
+                    const gain = this.audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1200, this.audioCtx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(600, this.audioCtx.currentTime + 0.15);
+                    osc.frequency.linearRampToValueAtTime(1800, this.audioCtx.currentTime + 0.3);
+
+                    gain.gain.setValueAtTime(0.1, this.audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.3);
+
+                    osc.connect(gain);
+                    gain.connect(this.audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(this.audioCtx.currentTime + 0.3);
+                } catch(e) {}
+            }
         }
-        
-        // Start typing effect after a short delay
-        setTimeout(loop, 1000);
+
+        const soundFX = new TechAudioSynthesizer();
+
+        // Audio Toggle Button
+        const soundToggle = document.getElementById('sound-toggle');
+        const soundIcon = document.getElementById('sound-icon');
+        const soundText = document.getElementById('sound-text');
+
+        soundToggle.addEventListener('click', () => {
+            soundFX.enabled = !soundFX.enabled;
+            if (soundFX.enabled) {
+                soundFX.init();
+                soundFX.playBlip(1800, 0.08);
+                soundIcon.className = "fas fa-volume-high text-xs";
+                soundText.textContent = "AUDIO: ON";
+                soundToggle.classList.remove('opacity-60');
+            } else {
+                soundIcon.className = "fas fa-volume-xmark text-xs";
+                soundText.textContent = "AUDIO: OFF";
+                soundToggle.classList.add('opacity-60');
+            }
+        });
+
+        // Attach sounds to hoverable elements
+        document.querySelectorAll('[data-sound="blip"], .hud-link').forEach(el => {
+            el.addEventListener('mouseenter', () => soundFX.playBlip(1700, 0.03));
+        });
+        document.querySelectorAll('[data-sound="click"], .btn-tech').forEach(el => {
+            el.addEventListener('mouseenter', () => soundFX.playBlip(1900, 0.03));
+            el.addEventListener('click', () => soundFX.playClick());
+        });
+
+        /* =====================================================================
+           B. CYBER HUD / JARVIS BUFFER BOOT SCREEN SEQUENCE
+           ===================================================================== */
+        const bootScreen = document.getElementById('boot-screen');
+        const bootPercent = document.getElementById('boot-percent');
+        const bootProgressBar = document.getElementById('boot-progress-bar');
+        const bootLogContainer = document.getElementById('boot-log-container');
+        const skipBootBtn = document.getElementById('skip-boot-btn');
+
+        const bootLogs = [
+            "NEURAL-OS V3.8 // KERNEL RUNTIME MOUNTED",
+            "INITIALIZING NEURAL REASONING CORES (PYTORCH)...",
+            "AUTHENTICATING DEFENSE OSINT INTERFACE (ATS TN)...",
+            "CONFIGURING AIR-GAPPED RAG SYSTEM & LOCAL OLLAMA...",
+            "CALIBRATING HOLOGRAPHIC SCHEMATICS & MATRIX CONSOLE...",
+            "OPERATOR SANJJEY ARUMUGAM // BIOMETRICS VERIFIED.",
+            "STATUS: ALL SYSTEMS NOMINAL // WELCOME, OPERATOR."
+        ];
+
+        let bootProgress = 0;
+        let bootLogIndex = 0;
+        let bootInterval = null;
+
+        function appendBootLog(text) {
+            const p = document.createElement('p');
+            p.className = "text-cyan-400 font-mono text-[11px] leading-snug";
+            p.innerHTML = `<span class="text-cyan-600">&gt;</span> ${text}`;
+            bootLogContainer.appendChild(p);
+            bootLogContainer.scrollTop = bootLogContainer.scrollHeight;
+            soundFX.playBlip(1200 + (bootLogIndex * 150), 0.02);
+        }
+
+        function finishBoot() {
+            if (bootInterval) clearInterval(bootInterval);
+            bootScreen.style.opacity = '0';
+            bootScreen.style.transform = 'scale(1.05)';
+            soundFX.playHologramDeploy();
+            setTimeout(() => {
+                bootScreen.style.display = 'none';
+            }, 700);
+        }
+
+        skipBootBtn.addEventListener('click', () => {
+            finishBoot();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') finishBoot();
+        });
+
+        // Run boot sequence
+        bootInterval = setInterval(() => {
+            bootProgress += 4;
+            if (bootProgress > 100) bootProgress = 100;
+            bootPercent.textContent = `${bootProgress}%`;
+            bootProgressBar.style.width = `${bootProgress}%`;
+
+            const stepThreshold = Math.floor((bootProgress / 100) * bootLogs.length);
+            if (stepThreshold > bootLogIndex && bootLogIndex < bootLogs.length) {
+                appendBootLog(bootLogs[bootLogIndex]);
+                bootLogIndex++;
+            }
+
+            if (bootProgress >= 100) {
+                clearInterval(bootInterval);
+                setTimeout(finishBoot, 600);
+            }
+        }, 60);
+
+        /* =====================================================================
+           C. INTERACTIVE MECHANICAL HELMET (OPEN & CLOSE ACTION)
+           ===================================================================== */
+        let helmetOpen = false;
+        const helmetPod = document.getElementById('helmet-pod');
+        const plateTop = document.getElementById('helmet-plate-top');
+        const plateBottom = document.getElementById('helmet-plate-bottom');
+        const helmetOpenHud = document.getElementById('helmet-open-hud');
+        const helmetStatusText = document.getElementById('helmet-status-text');
+
+        function toggleHelmet() {
+            helmetOpen = !helmetOpen;
+            soundFX.playVisorUnlatch();
+
+            if (helmetOpen) {
+                // Helmet plates slide smoothly open (Top moves up, Bottom moves down)
+                plateTop.style.transform = 'translateY(-110%) rotateX(12deg)';
+                plateBottom.style.transform = 'translateY(110%) rotateX(-12deg)';
+                plateTop.style.opacity = '0';
+                plateBottom.style.opacity = '0';
+                plateTop.style.pointerEvents = 'none';
+                plateBottom.style.pointerEvents = 'none';
+
+                // Reveal non-intrusive perimeter HUD
+                helmetOpenHud.style.opacity = '1';
+                helmetOpenHud.style.pointerEvents = 'auto';
+
+                if (helmetStatusText) helmetStatusText.textContent = "HELMET: UNLATCHED";
+            } else {
+                // Helmet plates slide smoothly closed (back to 0)
+                plateTop.style.transform = 'translateY(0) rotateX(0)';
+                plateBottom.style.transform = 'translateY(0) rotateX(0)';
+                plateTop.style.opacity = '1';
+                plateBottom.style.opacity = '1';
+                plateTop.style.pointerEvents = 'auto';
+                plateBottom.style.pointerEvents = 'auto';
+
+                // Hide perimeter HUD
+                helmetOpenHud.style.opacity = '0';
+                helmetOpenHud.style.pointerEvents = 'none';
+
+                if (helmetStatusText) helmetStatusText.textContent = "HELMET: SEALED";
+            }
+        }
+
+        /* =====================================================================
+           D. HOLOGRAPHIC PROJECT MODAL UNRAVELING (FROM SMALL POINT)
+           ===================================================================== */
+        const holoModal = document.getElementById('hologram-modal');
+        const holoContent = document.getElementById('hologram-content');
+        const holoTitle = document.getElementById('holo-title');
+        const holoSubtitle = document.getElementById('holo-subtitle');
+        const holoBody = document.getElementById('holo-body');
+
+        const hologramDatabase = {
+            vidiq: {
+                title: "VIDI-Q: AI-POWERED VIDEO GENERATION",
+                subtitle: "GEMINI MULTIMODAL AGENT // MANIM ENGINE // SELF-HEALING AST",
+                architecture: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono-tech text-xs">
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[STAGE 1: LLM INGEST]</div>
+                            <div class="text-gray-300 text-[11px]">User prompt processed by Gemini API to produce mathematical Manim script primitives.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[STAGE 2: AUTO-HEAL]</div>
+                            <div class="text-gray-300 text-[11px]">Sub-interpreter isolates syntax/runtime exceptions, feeds tracebacks into self-healing loop.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[STAGE 3: RENDER]</div>
+                            <div class="text-gray-300 text-[11px]">Hardware-accelerated Manim engine compiles high-fps mathematical video streams.</div>
+                        </div>
+                    </div>
+                `,
+                telemetry: [
+                    { label: "Rendering Velocity", val: "100x vs Traditional", color: "text-emerald-400" },
+                    { label: "Error Recovery Rate", val: "94.2% Auto-Healed", color: "text-cyan-300" },
+                    { label: "Pipeline Runtime", val: "Containerized (Docker)", color: "text-sky-400" },
+                    { label: "Framework", val: "Manim + Gemini Flash", color: "text-white" }
+                ],
+                details: "Designed to eliminate manual animation bottlenecks in education. By leveraging Gemini to construct procedural scene graphs, the auto-healing compiler verifies code correctness in real-time, delivering high quality explanatory animations at scale."
+            },
+            osteo: {
+                title: "OSTEOARTHRITIS CONTINUOUS PROGRESSION",
+                subtitle: "CONDITIONAL GAN (cGAN) // PYTORCH MEDICAL SYNTHESIS",
+                architecture: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono-tech text-xs">
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[STAGE 0: HEALTHY]</div>
+                            <div class="text-gray-300 text-[11px]">Normal joint space width and absence of osteophytes encoded in latent distribution.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[STAGES 1-3: MILD/MOD]</div>
+                            <div class="text-gray-300 text-[11px]">cGAN interpolates progressive joint narrowing, subchondral sclerosis, and bone spur creation.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[STAGE 4: SEVERE]</div>
+                            <div class="text-gray-300 text-[11px]">Severe joint obliteration synthesized with high clinical anatomical fidelity.</div>
+                        </div>
+                    </div>
+                `,
+                telemetry: [
+                    { label: "Progression Model", val: "Continuous (cGAN)", color: "text-cyan-300" },
+                    { label: "Diagnostic Stages", val: "5 Discrete & Fluid", color: "text-emerald-400" },
+                    { label: "Deep Learning Engine", val: "PyTorch & CUDA", color: "text-sky-400" },
+                    { label: "Clinical Target", val: "Prognosis & Education", color: "text-white" }
+                ],
+                details: "Traditional models only provide static classifications. This cGAN architecture bridges the clinical gap by generating seamless temporal transitions between stages, allowing orthopedic surgeons and radiologists to visually forecast disease progression."
+            },
+            kangal: {
+                title: "KANGAL: AI-DRIVEN OSINT & LOCAL RAG",
+                subtitle: "ATS TAMIL NADU DEFENSE INTELLIGENCE ENGINE",
+                architecture: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono-tech text-xs">
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[HARVESTING]</div>
+                            <div class="text-gray-300 text-[11px]">Playwright, Reddit API, and multi-source RSS scrapers gather real-time intelligence feeds.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[LOCAL RAG]</div>
+                            <div class="text-gray-300 text-[11px]">Ollama air-gapped LLM queries SQLite evidence vector store without third-party cloud leakage.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[KNOWLEDGE GRAPH]</div>
+                            <div class="text-gray-300 text-[11px]">NetworkX maps entity relations, statutory penal codes, workflows, and contradiction points.</div>
+                        </div>
+                    </div>
+                `,
+                telemetry: [
+                    { label: "Intelligence Sources", val: "7+ OSINT Feeds", color: "text-emerald-400" },
+                    { label: "Intelligence Sources", val: "7+ Channels", color: "text-cyan-300" },
+                    { label: "Security Level", val: "100% Local / Air-Gapped", color: "text-amber-400" },
+                    { label: "Graph Analytics", val: "NetworkX + SQLite", color: "text-white" }
+                ],
+                details: "Developed as an AI intern at the Anti Terrorism Squad, Tamil Nadu. Serves as a secure local investigation copilot, accelerating intelligence synthesis and statutory legal alignment while eliminating reliance on external APIs."
+            },
+            qrcode: {
+                title: "QR CODE ENCRYPTION VIA LU & PCA",
+                subtitle: "IEEE ICONSCEPT 2024 BEST PAPER AWARD WINNER",
+                architecture: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono-tech text-xs">
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[LU DECOMPOSITION]</div>
+                            <div class="text-gray-300 text-[11px]">Deconstructs QR code pixel matrix into lower and upper triangular cipher components.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[PCA PROJECTION]</div>
+                            <div class="text-gray-300 text-[11px]">Applies orthogonal linear transformation to obscure optical patterns from unauthorized scanners.</div>
+                        </div>
+                        <div class="p-3 bg-black/60 border border-cyan-500/30 rounded">
+                            <div class="text-cyan-400 font-bold mb-1">[DECRYPTION AUTH]</div>
+                            <div class="text-gray-300 text-[11px]">Keyed reverse eigenspace mapping recreates standard decodable barcode with 100% bit parity.</div>
+                        </div>
+                    </div>
+                `,
+                telemetry: [
+                    { label: "Conference", val: "IEEE ICONScept 2024", color: "text-cyan-300" },
+                    { label: "Recognition", val: "Best Paper Award", color: "text-amber-300" },
+                    { label: "Indexed In", val: "IEEE Xplore / Scopus", color: "text-emerald-400" },
+                    { label: "Mathematical Foundation", val: "LU Matrix & PCA", color: "text-white" }
+                ],
+                details: "Addresses visual eavesdropping and barcode spoofing by introducing mathematical matrix encryptions that render the visual QR unreadable to standard optical sensors until processed by authorized transformation keys."
+            }
+        };
+
+        function unravelHologram(systemKey, triggerElement) {
+            const data = hologramDatabase[systemKey];
+            if (!data) return;
+
+            soundFX.playHologramDeploy();
+
+            // Set dynamic content
+            holoTitle.textContent = data.title;
+            holoSubtitle.textContent = data.subtitle;
+
+            // Compute transform-origin based on button position
+            if (triggerElement) {
+                const rect = triggerElement.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height / 2;
+                holoContent.style.transformOrigin = `${originX}px ${originY}px`;
+            } else {
+                holoContent.style.transformOrigin = 'center center';
+            }
+
+            // Build Body
+            holoBody.innerHTML = `
+                <div>
+                    <h4 class="font-hud text-xs text-cyan-400 font-bold tracking-wider mb-3">SYSTEM ARCHITECTURE SCHEMATIC</h4>
+                    ${data.architecture}
+                </div>
+
+                <div>
+                    <h4 class="font-hud text-xs text-cyan-400 font-bold tracking-wider mb-3">PERFORMANCE & TELEMETRY</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono-tech">
+                        ${data.telemetry.map(t => `
+                            <div class="p-3 bg-black/40 border border-cyan-500/20 rounded">
+                                <div class="text-[10px] text-gray-400">${t.label}</div>
+                                <div class="text-sm font-bold ${t.color}">${t.val}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="p-4 bg-cyan-950/30 border border-cyan-500/30 rounded font-mono-tech text-xs text-gray-300 leading-relaxed">
+                    <strong class="text-cyan-300">TECHNICAL OVERVIEW:</strong> ${data.details}
+                </div>
+            `;
+
+            // Open Modal with expansion effect
+            holoModal.classList.remove('opacity-0', 'pointer-events-none');
+            holoModal.classList.add('opacity-100', 'pointer-events-auto');
+
+            setTimeout(() => {
+                holoContent.classList.remove('scale-0');
+                holoContent.classList.add('scale-100');
+            }, 20);
+        }
+
+        function closeHologram() {
+            soundFX.playClick();
+            holoContent.classList.remove('scale-100');
+            holoContent.classList.add('scale-0');
+
+            setTimeout(() => {
+                holoModal.classList.remove('opacity-100', 'pointer-events-auto');
+                holoModal.classList.add('opacity-0', 'pointer-events-none');
+            }, 300);
+        }
+
+        holoModal.addEventListener('click', (e) => {
+            if (e.target === holoModal) closeHologram();
+        });
+
+        /* =====================================================================
+           E. TYPEWRITER EFFECT IN HERO
+           ===================================================================== */
+        const typeTarget = document.getElementById('typewriter');
+        const roles = [
+            "Autonomous AI & Local RAG Systems.",
+            "Scalable Backend & Infrastructure.",
+            "High-Throughput Intelligence Platforms.",
+            "Conditional GANs & Medical Vision."
+        ];
+        let roleIdx = 0, charIdx = 0, isDeleting = false;
+
+        function typeLoop() {
+            const current = roles[roleIdx];
+            if (isDeleting) {
+                typeTarget.textContent = current.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                typeTarget.textContent = current.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let speed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIdx === current.length) {
+                speed = 2200; // Pause at completion
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                roleIdx = (roleIdx + 1) % roles.length;
+                speed = 500;
+            }
+
+            setTimeout(typeLoop, speed);
+        }
+        setTimeout(typeLoop, 1500);
+
+        /* =====================================================================
+           F. INTERACTIVE CANVAS MATRIX CONSTELLATION
+           ===================================================================== */
+        const canvas = document.getElementById('tech-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const particleCount = Math.min(width > 768 ? 65 : 30, 80);
+        let mouseX = -1000, mouseY = -1000;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.6,
+                vy: (Math.random() - 0.5) * 0.6,
+                radius: Math.random() * 1.5 + 1
+            });
+        }
+
+        function drawCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Update and draw particles
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 242, 254, 0.4)';
+                ctx.fill();
+
+                // Mouse interaction
+                const dxm = mouseX - p.x;
+                const dym = mouseY - p.y;
+                const distM = Math.sqrt(dxm * dxm + dym * dym);
+                if (distM < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouseX, mouseY);
+                    ctx.strokeStyle = `rgba(0, 242, 254, ${0.35 * (1 - distM / 120)})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+
+                // Connect nearby particles
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 110) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(0, 242, 254, ${0.12 * (1 - dist / 110)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(drawCanvas);
+        }
+        drawCanvas();
+
+        /* =====================================================================
+           G. SCROLL REVEAL & HUD CLOCK
+           ===================================================================== */
+        const revealNodes = document.querySelectorAll('.reveal-node');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+        revealNodes.forEach(node => observer.observe(node));
+
+        // Real-time HUD Clock
+        function updateHUDClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+            const clockEl = document.getElementById('hud-clock');
+            if (clockEl) clockEl.textContent = `${timeStr} IST`;
+        }
+        setInterval(updateHUDClock, 1000);
+        updateHUDClock();
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            soundFX.playClick();
+        });
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
     </script>
 </body>
 </html>
